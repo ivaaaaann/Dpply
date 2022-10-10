@@ -7,11 +7,11 @@ import Routes from "./Routes";
 const App = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!token.getToken(ACCESS_TOKEN_KEY)) {
-      navigate("/auth");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!token.getToken(ACCESS_TOKEN_KEY)) {
+  //     navigate("/auth");
+  //   }
+  // }, []);
 
   return <Routes />;
 };
