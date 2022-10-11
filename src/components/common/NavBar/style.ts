@@ -3,7 +3,7 @@ import { palette } from "../../../styles/palette";
 
 export const NavBarContainer = styled.div`
   width: 100%;
-  height: 85px;
+  min-height: 85px;
   display: flex;
   align-items: center;
   padding: 0px 200px;
