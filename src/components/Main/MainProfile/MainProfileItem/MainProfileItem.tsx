@@ -1,4 +1,5 @@
-import { Suggestion } from "../../../../types/suggestion/suggestion.type";
+import { useNavigate } from "react-router-dom";
+import { SuggestionPreview } from "../../../../types/suggestion/suggestion.type";
 import {
   MainProfileItemContainer,
   MainProfileItemContentCreatedAt,
@@ -11,12 +12,14 @@ import {
 } from "./style";
 
 interface Props {
-  data: Suggestion;
+  data: SuggestionPreview;
 }
 
 const MainProfileItem = ({ data }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <MainProfileItemContainer>
+    <MainProfileItemContainer onClick={() => navigate(`/read/${data.id}`)}>
       <MainProfileItemImg src={data.image} />
       <MainProfileItemContentWrap>
         <MainProfileItemContentName>{data.name}</MainProfileItemContentName>

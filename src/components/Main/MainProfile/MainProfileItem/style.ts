@@ -6,6 +6,7 @@ export const MainProfileItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 19px;
+  cursor: pointer;
 `;
 
 export const MainProfileItemImg = styled.img`

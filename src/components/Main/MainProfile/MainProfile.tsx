@@ -8,10 +8,10 @@ import { MainProfileContainer, MainProfileItemWrap } from "./style";
 import { BiUser } from "@react-icons/all-files/bi/BiUser";
 import MainProfileHeader from "./MainProfileHeader/MainProfileHeader/MainProfileHeader";
 import MainProfileTab from "./MainProfileTab/MainProfileTab";
-import { Suggestion } from "../../../types/suggestion/suggestion.type";
+import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
 import MainProfileItem from "./MainProfileItem/MainProfileItem";
 
-const TEST: Suggestion[] = [
+const TEST: SuggestionPreview[] = [
   {
     id: 0,
     image: "",

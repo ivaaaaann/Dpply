@@ -1,4 +1,5 @@
-import { Suggestion } from "../../../../types/suggestion/suggestion.type";
+import { useNavigate } from "react-router-dom";
+import { SuggestionPreview } from "../../../../types/suggestion/suggestion.type";
 import {
   MainSuggestionItemContainer,
   MainSuggestionItemContentName,
@@ -11,12 +12,14 @@ import {
 } from "./style";
 
 interface Props {
-  data: Suggestion;
+  data: SuggestionPreview;
 }
 
 const MainSuggestionItem = ({ data }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <MainSuggestionItemContainer>
+    <MainSuggestionItemContainer onClick={() => navigate(`/read/${data.id}`)}>
       <MainSuggestionItemImg />
       <MainSuggestionItemContentWrap>
         <MainSuggestionItemContentName>익명</MainSuggestionItemContentName>

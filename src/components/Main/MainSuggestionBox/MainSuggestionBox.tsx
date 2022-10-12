@@ -6,10 +6,10 @@ import {
 } from "../style";
 import { MainSuggestionBoxContainer, MainSuggestionBoxItemWrap } from "./style";
 import { BsEnvelope } from "@react-icons/all-files/bs/BsEnvelope";
-import { Suggestion } from "../../../types/suggestion/suggestion.type";
+import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
 import MainSuggestionItem from "./MainSuggestionItem/MainSuggestionItem";
 
-const TEST: Suggestion[] = [
+const TEST: SuggestionPreview[] = [
   {
     id: 0,
     image: "",

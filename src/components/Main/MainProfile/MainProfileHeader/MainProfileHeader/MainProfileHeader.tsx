@@ -11,8 +11,8 @@ const MainProfileHeader = () => {
     <MainProfileHeaderContainer>
       <MainProfileHeaderImg />
       <MainProfileHeaderInfoWrap>
-        <MainProfileHeaderName>최희건</MainProfileHeaderName>
-        <MainProfileHeaderClass>1학년 1반 18번</MainProfileHeaderClass>
+        <MainProfileHeaderName>백승하</MainProfileHeaderName>
+        <MainProfileHeaderClass>1학년 3반 10번</MainProfileHeaderClass>
       </MainProfileHeaderInfoWrap>
     </MainProfileHeaderContainer>
   );
