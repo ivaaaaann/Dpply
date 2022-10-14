@@ -1,5 +1,7 @@
+import AuthLoading from "../components/AuthLoading/AuthLoading";
+
 const AuthLoadingPage = () => {
-  return <div>로딩</div>;
+  return <AuthLoading />;
 };
 
 export default AuthLoadingPage;

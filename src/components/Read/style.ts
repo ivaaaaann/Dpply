@@ -14,4 +14,5 @@ export const ReadWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 106px;
+  padding-bottom: 68px;
 `;

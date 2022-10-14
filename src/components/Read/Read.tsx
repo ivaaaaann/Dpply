@@ -1,4 +1,5 @@
 import { Suggestion } from "../../types/suggestion/suggestion.type";
+import ReadComment from "./ReadComment/ReadComment";
 import ReadHeader from "./ReadHeader/ReadHeader";
 import { ReadContainer, ReadWrap } from "./style";
 
@@ -11,6 +12,7 @@ const Read = ({ data }: Props) => {
     <ReadContainer>
       <ReadWrap>
         <ReadHeader data={data} />
+        <ReadComment data={data.comments} />
       </ReadWrap>
     </ReadContainer>
   );
