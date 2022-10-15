@@ -3,6 +3,7 @@ import AuthLoadingPage from "../pages/AuthLoadingPage";
 import AuthPage from "../pages/AuthPage";
 import MainPage from "../pages/MainPage";
 import ReadPage from "../pages/ReadPage";
+import WritePage from "../pages/WritePage";
 
 const Routes = () => {
   return (
@@ -11,6 +12,7 @@ const Routes = () => {
       <Route path="/read/:id" element={<ReadPage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/loading" element={<AuthLoadingPage />} />
+      <Route path="/write" element={<WritePage />} />
     </Switch>
   );
 };
