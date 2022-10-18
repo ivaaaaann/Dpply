@@ -1,7 +1,7 @@
 import useAuth from "../../hooks/auth/useAuth";
 
 const AuthLoading = () => {
-  const {} = useAuth();
+  useAuth();
 
   return <div></div>;
 };

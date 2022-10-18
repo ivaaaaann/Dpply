@@ -1,3 +1,4 @@
+import { useGetMyMember } from "../../../../../quries/member/member.query";
 import {
   MainProfileHeaderClass,
   MainProfileHeaderContainer,
@@ -7,12 +8,16 @@ import {
 } from "./style";
 
 const MainProfileHeader = () => {
+  const { data } = useGetMyMember();
+
   return (
     <MainProfileHeaderContainer>
       <MainProfileHeaderImg />
       <MainProfileHeaderInfoWrap>
-        <MainProfileHeaderName>백승하</MainProfileHeaderName>
-        <MainProfileHeaderClass>1학년 3반 10번</MainProfileHeaderClass>
+        <MainProfileHeaderName>{data?.data.name}</MainProfileHeaderName>
+        <MainProfileHeaderClass>
+          {data?.data.grade}학년 {data?.data.room}반 {data?.data.number}번
+        </MainProfileHeaderClass>
       </MainProfileHeaderInfoWrap>
     </MainProfileHeaderContainer>
   );

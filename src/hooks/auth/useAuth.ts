@@ -1,5 +1,10 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+} from "../../constants/token/token.constant";
+import cookie from "../../lib/cookie/cookie";
 import { usePostAuthLogin } from "../../quries/auth/auth.query";
 import { queryStringParser } from "../../utils/queryStringParser";
 
@@ -12,9 +17,12 @@ const useAuth = () => {
   useEffect(() => {
     (async () => {
       postAuthLoginMutation.mutateAsync(
-        { code: queryStringParser(search)[0] },
+        { code: queryStringParser(search).code },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
+            console.log(data);
+            cookie.setCookie(ACCESS_TOKEN_KEY, data.data.token);
+            cookie.setCookie(REFRESH_TOKEN_KEY, data.data.refreshToken);
             window.alert("인증 성공");
             navigate("/");
           },

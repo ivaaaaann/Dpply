@@ -8,23 +8,14 @@ import {
 } from "./style";
 import NavLogo from "../../../assets/logo/logo.svg";
 import NavBarSearch from "./NavBarSearch/NavBarSearch";
-import { useEffect, useState } from "react";
-import cookie from "../../../lib/cookie/cookie";
-import { ACCESS_TOKEN_KEY } from "../../../constants/token/token.constant";
 import { FaPen } from "@react-icons/all-files/fa/FaPen";
 import { useNavigate } from "react-router-dom";
+import useAuthCheck from "../../../hooks/auth/useAuthCheck";
 
 const NavBar = () => {
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (cookie.getCookie(ACCESS_TOKEN_KEY)) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
+  const { isLogin } = useAuthCheck();
 
   return (
     <NavBarContainer>
