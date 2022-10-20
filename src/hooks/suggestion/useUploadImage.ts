@@ -1,78 +1,67 @@
-import React, { DragEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, DragEvent, useCallback, useState } from "react";
+import { useRecoilState } from "recoil";
+import { suggestionPostImage } from "../../store/suggestion/suggestion.store";
 
 const useUploadImage = () => {
-  const uploadBoxRef = useRef<HTMLElement>(null);
   const [isDrag, setIsDrag] = useState(false);
-  const [dragCount, setDragCount] = useState(0);
-  const [image, setImage] = useState<DataTransferItem>();
+  const [image, setImage] = useRecoilState(suggestionPostImage);
 
-  const dropHandler = (e: DragEvent) => {
+  const onChangeImage = useCallback(
+    (e: ChangeEvent<HTMLInputElement> | any) => {
+      let image: File;
+      if (e.type === "drop") {
+        image = e.dataTransfer.files[0];
+      } else {
+        image = e.target.files[0];
+      }
+      const formData = new FormData();
+      formData.append("img", image);
+    },
+    []
+  );
+
+  const dropHandler = useCallback(
+    (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDrag(false);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        onChangeImage(e);
+        e.dataTransfer.clearData();
+      }
+    },
+    [onChangeImage]
+  );
+
+  const dragHandler = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDrag(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleInputImage(e, "drag");
-      e.dataTransfer.clearData();
-      setDragCount(0);
-    }
-  };
 
-  const dragHandler = (e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const dragInHandler = (e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (dragCount < 2) setDragCount((prev) => prev + 1);
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+    if (e.dataTransfer.files) {
       setIsDrag(true);
     }
-  };
+  }, []);
 
-  const dragOutHandler = (e: DragEvent) => {
+  const dragInHandler = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setDragCount((prev) => prev - 1);
-    if (dragCount === 0) setIsDrag(false);
-  };
+  }, []);
 
-  const dragOverHandler = (e: DragEvent<Element>) => {
+  const dragOutHandler = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    setIsDrag(false);
+  }, []);
+
+  return {
+    dropHandler,
+    dragHandler,
+    dragInHandler,
+    dragOutHandler,
+    onChangeImage,
+    isDrag,
   };
-
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    console.log(files);
-  };
-
-  const handleInputImage = (e: any, type: "drag" | "unDrag") => {
-    if (type === "drag") {
-      setImage(e.dataTransfer.items[0]);
-    } else if (type === "unDrag") {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  // useEffect(() => {
-  //   const uploadBox = uploadBoxRef.current;
-
-  //   uploadBox?.addEventListener("drop", dropHandler);
-  //   uploadBox?.addEventListener("dragover", dragHandler);
-  //   uploadBox?.addEventListener("dragleave", dragOutHandler);
-  //   uploadBox?.addEventListener("dragEnter" dragInHandler);
-
-  //   return () => {
-  //     uploadBox?.removeEventListener("drop", dropHandler);
-  //     uploadBox?.removeEventListener("dragover", dragHandler);
-  //     uploadBox?.removeEventListener("dragleave", dragOutHandler);
-  //     uploadBox?.removeEventListener("dragEnter" dragInHandler);
-  //   };
-  // }, []);
-
-  return { uploadBoxRef };
 };
 
 export default useUploadImage;

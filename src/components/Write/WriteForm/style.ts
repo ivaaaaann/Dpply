@@ -1,10 +1,16 @@
 import styled from "styled-components";
+import { palette } from "../../../styles/palette";
 
 export const WriteFormContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 37px;
+  padding-bottom: 53px;
+
+  input[type="file"] {
+    display: none;
+  }
 `;
 
 export const WriteFormInput = styled.input`
@@ -25,12 +31,91 @@ export const WriteFormInput = styled.input`
 
 export const WriteFormFileWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  column-gap: 49px;
 `;
 
-export const WriteFormFileInput = styled.div`
-  width: 550px;
+export const WriteFormFileInputLabel = styled.label`
+  min-width: 550px;
   height: 550px;
-  border: 1px solid #909090;
+  border: 2px dashed #909090;
   border-radius: 10px;
+  background-size: 10px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const WriteFormFileInputTextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const WriteFormFileInputIcon = styled.div`
+  width: 97px;
+  height: 97px;
+  font-size: 97px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #909090;
+`;
+
+export const WriteFormText = styled.p`
+  font-size: 24px;
+  line-height: 29px;
+  color: #909090;
+  cursor: pointer;
+  text-align: center;
+
+  strong {
+    color: ${palette.main};
+    text-decoration: underline;
+  }
+`;
+
+export const WriteFormTextarea = styled.textarea`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid #909090;
+  outline: none;
+  resize: none;
+  padding: 25px;
+  box-sizing: border-box;
+  font-size: 20px;
+`;
+
+export const WriteFormSubmitWrap = styled.div`
+  display: flex;
+  justify-content: end;
+  column-gap: 27px;
+`;
+
+export const WriteFormBackButton = styled.div`
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #b5b5b5;
+  font-size: 24px;
+  font-weight: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+`;
+
+export const WriteFormSubmitButton = styled.div`
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: ${palette.main};
+  color: white;
+  font-size: 24px;
+  font-weight: 700px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
 `;

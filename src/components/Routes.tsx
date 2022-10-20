@@ -19,7 +19,7 @@ const Routes = () => {
       <Route path="/read/:id" element={<ReadPage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/loading" element={<AuthLoadingPage />} />
-      <Route path="/write" element={<AuthWritePage />} />
+      <Route path="/write" element={<WritePage />} />
       <Route path="/profile" element={<AuthProfilePage />} />
       <Route path="/admin" element={<AuthAdminMainPage />} />
     </Switch>
