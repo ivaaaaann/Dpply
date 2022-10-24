@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const MainProfileHeaderContainer = styled.div`
   width: 100%;
-  height: 150px;
-  padding: 32px 36px;
+  height: 85;
+  padding: 33px 36px;
+  padding-top: 0px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: center;
   column-gap: 26px;
 `;
 
@@ -38,4 +38,11 @@ export const MainProfileHeaderClass = styled.p`
   font-size: 16px;
   color: black;
   line-height: 19px;
+`;
+
+export const MainProfileHeaderNotLogin = styled.p`
+  width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  color: #8a8a8a;
 `;

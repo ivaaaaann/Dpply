@@ -7,7 +7,7 @@ export const MainProfileContainer = styled.div`
 
 export const MainProfileItemWrap = styled.div`
   width: 100%;
-  height: 258px;
+  height: 292px;
   display: flex;
   flex-direction: column;
   overflow: scroll;

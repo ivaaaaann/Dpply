@@ -1,10 +1,7 @@
 import { ChangeEvent, DragEvent, useCallback, useState } from "react";
-import { useRecoilState } from "recoil";
-import { suggestionPostImage } from "../../store/suggestion/suggestion.store";
 
 const useUploadImage = () => {
   const [isDrag, setIsDrag] = useState(false);
-  const [image, setImage] = useRecoilState(suggestionPostImage);
 
   const onChangeImage = useCallback(
     (e: ChangeEvent<HTMLInputElement> | any) => {

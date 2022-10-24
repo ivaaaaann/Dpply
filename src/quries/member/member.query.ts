@@ -6,4 +6,5 @@ export const useGetMyMember = (): UseQueryResult<myMemberResponse> =>
   useQuery("member/getMyMember", () => memberRepository.getMyMember(), {
     cacheTime: 1000 * 60 * 60,
     staleTime: 1000 * 30 * 30,
+    retry: 2,
   });
