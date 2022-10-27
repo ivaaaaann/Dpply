@@ -1,4 +1,5 @@
 import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
+import dataTransform from "../../../utils/transform/dataTransform";
 import {
   ProfileListItemContainer,
   ProfileListItemImg,
@@ -20,13 +21,15 @@ interface Props {
 const ProfileListItem = ({ data }: Props) => {
   return (
     <ProfileListItemContainer>
-      <ProfileListItemImg src={data.image} />
+      <ProfileListItemImg src={data.imageUrl} />
       <ProfileListItemMiddleWrap>
-        <ProfileListItemMiddleName>{data.name}</ProfileListItemMiddleName>
+        <ProfileListItemMiddleName>{data.user.name}</ProfileListItemMiddleName>
         <ProfileListItemMiddleTitle>{data.title}</ProfileListItemMiddleTitle>
         <ProfileListItemMiddleTagWrap>
-          {data.tags.map((tag) => (
-            <ProfileListItemTag>#{tag}</ProfileListItemTag>
+          {data.tag.map((tag) => (
+            <ProfileListItemTag>
+              #{dataTransform.tagTransform(tag)}
+            </ProfileListItemTag>
           ))}
         </ProfileListItemMiddleTagWrap>
       </ProfileListItemMiddleWrap>
@@ -37,7 +40,7 @@ const ProfileListItem = ({ data }: Props) => {
           <ProfileListItemRightButton>삭제</ProfileListItemRightButton>
         </ProfileListItemRightButtonWrap>
         <ProfileListItemRightCreatedAt>
-          {data.created_at}
+          {data.createAt}
         </ProfileListItemRightCreatedAt>
       </ProfileListItemRightWrap>
     </ProfileListItemContainer>

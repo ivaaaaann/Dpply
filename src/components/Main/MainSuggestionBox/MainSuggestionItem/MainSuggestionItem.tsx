@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { SuggestionPreview } from "../../../../types/suggestion/suggestion.type";
+import dataTransform from "../../../../utils/transform/dataTransform";
 import {
   MainSuggestionItemContainer,
   MainSuggestionItemContentName,
@@ -27,16 +28,14 @@ const MainSuggestionItem = ({ data }: Props) => {
           {data.title}
         </MainSuggestionItemContentTitle>
         <MainSuggestionItemContentTagWrap>
-          {data.tags.map((tag, idx) => (
+          {data.tag.map((tag, idx) => (
             <MainSuggestionItemContentTagText key={idx}>
-              #{tag}
+              #{dataTransform.tagTransform(tag)}
             </MainSuggestionItemContentTagText>
           ))}
         </MainSuggestionItemContentTagWrap>
       </MainSuggestionItemContentWrap>
-      <MainSuggestionItemCreatedAt>
-        {data.created_at}
-      </MainSuggestionItemCreatedAt>
+      <MainSuggestionItemCreatedAt>{data.createAt}</MainSuggestionItemCreatedAt>
     </MainSuggestionItemContainer>
   );
 };

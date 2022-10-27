@@ -27,8 +27,8 @@ import {
 import { AiFillLike } from "@react-icons/all-files/ai/AiFillLike";
 import { AiOutlineLike } from "@react-icons/all-files/ai/AiOutlineLike";
 import { GoComment } from "@react-icons/all-files/go/GoComment";
-import { BsEye } from "@react-icons/all-files/bs/BsEye";
 import { Suggestion } from "../../../types/suggestion/suggestion.type";
+import dataTransform from "../../../utils/transform/dataTransform";
 
 interface Props {
   data: Suggestion;
@@ -42,14 +42,16 @@ const ReadHeader = ({ data }: Props) => {
       <ReadHeaderProfileWrap>
         <ReadHeaderProfileImg />
         <ReadHeaderProfileTextWrap>
-          <ReadHeaderProfileName>{data.name}</ReadHeaderProfileName>
+          <ReadHeaderProfileName>{data.user.name}</ReadHeaderProfileName>
           <ReadHeaderProfileClass>1학년 1반 18번</ReadHeaderProfileClass>
         </ReadHeaderProfileTextWrap>
         <ReadHeaderLikeButton isClick={isClick}>
           <ReadHeaderLikeButtonIcon>
             <AiFillLike />
           </ReadHeaderLikeButtonIcon>
-          <ReadHeaderLikeButtonText>{data.like_count}</ReadHeaderLikeButtonText>
+          <ReadHeaderLikeButtonText>
+            {data.sympathyCount}
+          </ReadHeaderLikeButtonText>
         </ReadHeaderLikeButton>
       </ReadHeaderProfileWrap>
       <ReadHeaderContentWrap>
@@ -59,17 +61,19 @@ const ReadHeader = ({ data }: Props) => {
               {data.title}
             </ReadHeaderContentLeftTitle>
             <ReadHeaderContentLeftTagWrap>
-              {data.tags.map((tag) => (
-                <ReadHeaderContentLeftTag>#{tag}</ReadHeaderContentLeftTag>
+              {data.tag.map((tag) => (
+                <ReadHeaderContentLeftTag>
+                  #{dataTransform.tagTransform(tag)}
+                </ReadHeaderContentLeftTag>
               ))}
             </ReadHeaderContentLeftTagWrap>
           </ReadHeaderContentLeftTitleWrap>
           <ReadHeaderContentLeftContent>
-            {data.content}
+            {data.text}
           </ReadHeaderContentLeftContent>
           <ReadHeaderContentLeftBottomWrap>
             <ReadHeaderContentLeftBottomCreatedAt>
-              {data.created_at}
+              {data.createAt}
             </ReadHeaderContentLeftBottomCreatedAt>
             <ReadHeaderContentLeftBottomInfoWrap>
               <ReadHeaderContentLeftBottomInfoItemWrap>
@@ -77,19 +81,13 @@ const ReadHeader = ({ data }: Props) => {
                   <AiOutlineLike />
                 </ReadHeaderContentLeftBottomInfoItemIcon>
                 <ReadHeaderContentLeftBottomInfoItemText>
-                  {data.like_count}
+                  {data.sympathyCount}
                 </ReadHeaderContentLeftBottomInfoItemText>
                 <ReadHeaderContentLeftBottomInfoItemIcon>
                   <GoComment />
                 </ReadHeaderContentLeftBottomInfoItemIcon>
                 <ReadHeaderContentLeftBottomInfoItemText>
-                  {data.comments.length}
-                </ReadHeaderContentLeftBottomInfoItemText>
-                <ReadHeaderContentLeftBottomInfoItemIcon>
-                  <BsEye />
-                </ReadHeaderContentLeftBottomInfoItemIcon>
-                <ReadHeaderContentLeftBottomInfoItemText>
-                  {data.watch_count}
+                  4
                 </ReadHeaderContentLeftBottomInfoItemText>
               </ReadHeaderContentLeftBottomInfoItemWrap>
             </ReadHeaderContentLeftBottomInfoWrap>

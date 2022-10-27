@@ -1,4 +1,3 @@
-import useUploadImage from "../../../hooks/suggestion/useUploadImage";
 import {
   WriteFormBackButton,
   WriteFormContainer,
@@ -14,6 +13,7 @@ import {
 } from "./style";
 import { BsCloudUpload } from "@react-icons/all-files/bs/BsCloudUpload";
 import { useNavigate } from "react-router-dom";
+import useUploadSuggestionImage from "../../../hooks/suggestion/useUploadSuggestionImage";
 
 const WriteForm = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const WriteForm = () => {
     onChangeImage,
     dropHandler,
     isDrag,
-  } = useUploadImage();
+  } = useUploadSuggestionImage();
 
   return (
     <WriteFormContainer>

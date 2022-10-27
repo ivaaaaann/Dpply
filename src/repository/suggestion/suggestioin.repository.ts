@@ -1,3 +1,7 @@
+import { customAxios } from "../../lib/axios/axios";
+import { suggestionsResponse } from "../../types/suggestion/suggestion.type";
+import { getSuggestionsByPageParam } from "./suggestioin.param";
+
 class SuggestionRepository {
   public async getSuggestion() {}
 
@@ -7,7 +11,12 @@ class SuggestionRepository {
 
   public async deleteSuggestion() {}
 
-  public async getSuggestions() {}
+  public async getSuggestionsByPage({
+    page,
+  }: getSuggestionsByPageParam): Promise<suggestionsResponse> {
+    const { data } = await customAxios.get(`/suggesion?page=${page}`);
+    return data;
+  }
 
   public async getResolveSuggestions() {}
 

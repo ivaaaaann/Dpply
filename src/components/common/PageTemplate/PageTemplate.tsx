@@ -10,10 +10,14 @@ interface Props {
 const PageTemplate = ({ children }: Props) => {
   const { pathname } = useLocation();
 
+  const isNoneNavView = pathname === "/auth" || pathname === "/loading";
+
   return (
     <PageTemplateContainer>
-      {!(pathname === "/auth" || pathname === "/loading") && <NavBar />}
-      <PageTemplateWrap>{children}</PageTemplateWrap>
+      {!isNoneNavView && <NavBar />}
+      <PageTemplateWrap isNoneNavView={isNoneNavView}>
+        {children}
+      </PageTemplateWrap>
     </PageTemplateContainer>
   );
 };

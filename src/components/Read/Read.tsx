@@ -12,7 +12,7 @@ const Read = ({ data }: Props) => {
     <ReadContainer>
       <ReadWrap>
         <ReadHeader data={data} />
-        <ReadComment data={data.comments} />
+        <ReadComment data={["asdasd", "sdadda", "Adsd"]} />
       </ReadWrap>
     </ReadContainer>
   );

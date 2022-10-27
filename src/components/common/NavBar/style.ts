@@ -11,9 +11,20 @@ export const NavBarContainer = styled.div`
   box-sizing: border-box;
 `;
 
+export const NavBarLogoWrap = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
 export const NavBarLogo = styled.img`
   width: 140px;
   object-fit: scale-down;
+`;
+
+export const NavBarAdminText = styled.p`
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
 `;
 
 export const NavBarLoginText = styled.span`

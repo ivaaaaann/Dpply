@@ -1,8 +1,12 @@
-import { SuggestionPreview } from "../../types/suggestion/suggestion.type";
-import ProfileApproveList from "./ProfileApproveList/ProfileApproveList";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import ProfilePendingList from "./ProfilePendingList/ProfilePendingList";
-import { ProfileContainer, ProfileWrap } from "./style";
+import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
+import {
+  AdminMainListContainer,
+  AdminMainListTbody,
+  AdminMainListTd,
+  AdminMainListTh,
+  AdminMainListThead,
+  AdminMainListTr,
+} from "./style";
 
 const TEST: SuggestionPreview[] = [
   {
@@ -109,16 +113,35 @@ const TEST: SuggestionPreview[] = [
   },
 ];
 
-const Profile = () => {
+const AdminMainList = () => {
   return (
-    <ProfileContainer>
-      <ProfileWrap>
-        <ProfileInfo />
-        <ProfilePendingList data={TEST} />
-        <ProfileApproveList data={TEST} />
-      </ProfileWrap>
-    </ProfileContainer>
+    <AdminMainListContainer>
+      <AdminMainListThead>
+        <AdminMainListTr>
+          <AdminMainListTh>번호</AdminMainListTh>
+          <AdminMainListTh style={{ width: 832 }}>제목</AdminMainListTh>
+          <AdminMainListTh>작성자</AdminMainListTh>
+          <AdminMainListTh>학번</AdminMainListTh>
+          <AdminMainListTh>작성일</AdminMainListTh>
+          <AdminMainListTh></AdminMainListTh>
+        </AdminMainListTr>
+      </AdminMainListThead>
+      <AdminMainListTbody>
+        {TEST.map((item) => (
+          <AdminMainListTr>
+            <AdminMainListTd>{item.id}</AdminMainListTd>
+            <AdminMainListTd style={{ width: 832, textAlign: "start" }}>
+              {item.title}
+            </AdminMainListTd>
+            <AdminMainListTd>{item.user.name}</AdminMainListTd>
+            <AdminMainListTd>1118</AdminMainListTd>
+            <AdminMainListTd>{item.createAt}</AdminMainListTd>
+            <AdminMainListTd></AdminMainListTd>
+          </AdminMainListTr>
+        ))}
+      </AdminMainListTbody>
+    </AdminMainListContainer>
   );
 };
 
-export default Profile;
+export default AdminMainList;

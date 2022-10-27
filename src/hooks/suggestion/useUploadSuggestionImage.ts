@@ -1,6 +1,6 @@
 import { ChangeEvent, DragEvent, useCallback, useState } from "react";
 
-const useUploadImage = () => {
+const useUploadSuggestionImage = () => {
   const [isDrag, setIsDrag] = useState(false);
 
   const onChangeImage = useCallback(
@@ -61,4 +61,4 @@ const useUploadImage = () => {
   };
 };
 
-export default useUploadImage;
+export default useUploadSuggestionImage;

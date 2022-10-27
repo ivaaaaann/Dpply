@@ -1,7 +1,9 @@
 import {
+  NavBarAdminText,
   NavBarContainer,
   NavBarLoginText,
   NavBarLogo,
+  NavBarLogoWrap,
   NavBarWriteButton,
   NavBarWriteButtonIcon,
   NavBarWriteButtonText,
@@ -9,17 +11,22 @@ import {
 import NavLogo from "../../../assets/logo/logo.svg";
 import NavBarSearch from "./NavBarSearch/NavBarSearch";
 import { FaPen } from "@react-icons/all-files/fa/FaPen";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuthCheck from "../../../hooks/auth/useAuthCheck";
 
 const NavBar = () => {
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
   const { isLogin } = useAuthCheck();
+
+  const isAdmin = pathname.split("/")[1] === "admin";
 
   return (
     <NavBarContainer>
-      <NavBarLogo src={NavLogo} />
+      <NavBarLogoWrap>
+        <NavBarLogo src={NavLogo} />
+        {isAdmin && <NavBarAdminText>Admin</NavBarAdminText>}
+      </NavBarLogoWrap>
       <NavBarSearch />
       {isLogin ? (
         <NavBarWriteButton>

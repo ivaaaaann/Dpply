@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { SuggestionPreview } from "../../../../types/suggestion/suggestion.type";
+import dataTransform from "../../../../utils/transform/dataTransform";
 import {
   MainProfileItemContainer,
   MainProfileItemContentCreatedAt,
@@ -20,20 +21,22 @@ const MainProfileItem = ({ data }: Props) => {
 
   return (
     <MainProfileItemContainer onClick={() => navigate(`/read/${data.id}`)}>
-      <MainProfileItemImg src={data.image} />
+      <MainProfileItemImg src={data.imageUrl} />
       <MainProfileItemContentWrap>
-        <MainProfileItemContentName>{data.name}</MainProfileItemContentName>
+        <MainProfileItemContentName>
+          {data.user.name}
+        </MainProfileItemContentName>
         <MainProfileItemContentTitle>{data.title}</MainProfileItemContentTitle>
         <MainProfileItemContentTagWrap>
-          {data.tags.map((tag, idx) => (
+          {data.tag.map((tag, idx) => (
             <MainProfileItemContentTagText key={idx}>
-              {tag}
+              #{dataTransform.tagTransform(tag)}
             </MainProfileItemContentTagText>
           ))}
         </MainProfileItemContentTagWrap>
       </MainProfileItemContentWrap>
       <MainProfileItemContentCreatedAt>
-        {data.created_at}
+        {data.createAt}
       </MainProfileItemContentCreatedAt>
     </MainProfileItemContainer>
   );
