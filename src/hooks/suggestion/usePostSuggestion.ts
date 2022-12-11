@@ -1,18 +1,31 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { suggestionPostImageAtom } from "../../store/suggestion/suggestion.store";
+import { Suggestion } from "../../types/suggestion/suggestion.type";
 
 const usePostSuggestion = () => {
-  const [content, setContent] = useState<string>("");
-  const [tempHashTag, setTempHashTag] = useState<string>("");
-  const [hashTag, setHashTag] = useState<string[]>([]);
+  const [postData, setPostData] = useState<Suggestion>({
+    title: "",
+    tag: [],
+    text: "",
+    imageUrl: "",
+  });
 
-  const onAddHashTag = () => {
-    setHashTag((prev) => [...prev]);
+  const image = useRecoilValue(suggestionPostImageAtom);
+
+  useEffect(() => {
+    setPostData((prev) => ({ ...prev, imageUrl: image }));
+  }, [image]);
+
+  const onChangeTextValue = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setPostData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onChangeHashTag = (e: ChangeEvent<HTMLInputElement>) =>
-    setTempHashTag(e.target.value);
-
-  return {};
+  return { postData, onChangeTextValue };
 };
 
 export default usePostSuggestion;

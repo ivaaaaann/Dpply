@@ -14,9 +14,12 @@ import {
 import { BsCloudUpload } from "@react-icons/all-files/bs/BsCloudUpload";
 import { useNavigate } from "react-router-dom";
 import useUploadSuggestionImage from "../../../hooks/suggestion/useUploadSuggestionImage";
+import usePostSuggestion from "../../../hooks/suggestion/usePostSuggestion";
 
 const WriteForm = () => {
   const navigate = useNavigate();
+
+  const { postData, onChangeTextValue } = usePostSuggestion();
 
   const {
     dragHandler,
@@ -29,8 +32,13 @@ const WriteForm = () => {
 
   return (
     <WriteFormContainer>
-      <WriteFormInput placeholder="제목을 입력해주세요." />
-      <WriteFormInput placeholder="제목을 입력해주세요." />
+      <WriteFormInput
+        placeholder="제목을 입력해주세요."
+        value={postData.title}
+        name="title"
+        onChange={onChangeTextValue}
+      />
+      <WriteFormInput placeholder="카테고리를 입력해주세요." />
       <WriteFormFileWrap>
         <input id="WriteFormFileInput" type="file" onChange={onChangeImage} />
         <WriteFormFileInputLabel
@@ -52,7 +60,12 @@ const WriteForm = () => {
             </WriteFormText>
           </WriteFormFileInputTextWrap>
         </WriteFormFileInputLabel>
-        <WriteFormTextarea placeholder="건의할 내용을 입력해주세요" />
+        <WriteFormTextarea
+          placeholder="건의할 내용을 입력해주세요"
+          onChange={onChangeTextValue}
+          value={postData.text}
+          name="text"
+        />
       </WriteFormFileWrap>
       <WriteFormSubmitWrap>
         <WriteFormBackButton onClick={() => navigate(-1)}>

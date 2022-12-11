@@ -27,11 +27,11 @@ import {
 import { AiFillLike } from "@react-icons/all-files/ai/AiFillLike";
 import { AiOutlineLike } from "@react-icons/all-files/ai/AiOutlineLike";
 import { GoComment } from "@react-icons/all-files/go/GoComment";
-import { Suggestion } from "../../../types/suggestion/suggestion.type";
+import { SuggestionDetail } from "../../../types/suggestion/suggestion.type";
 import dataTransform from "../../../utils/transform/dataTransform";
 
 interface Props {
-  data: Suggestion;
+  data: SuggestionDetail;
 }
 
 const ReadHeader = ({ data }: Props) => {

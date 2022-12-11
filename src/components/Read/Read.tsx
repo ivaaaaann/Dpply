@@ -1,10 +1,10 @@
-import { Suggestion } from "../../types/suggestion/suggestion.type";
+import { SuggestionDetail } from "../../types/suggestion/suggestion.type";
 import ReadComment from "./ReadComment/ReadComment";
 import ReadHeader from "./ReadHeader/ReadHeader";
 import { ReadContainer, ReadWrap } from "./style";
 
 interface Props {
-  data: Suggestion;
+  data: SuggestionDetail;
 }
 
 const Read = ({ data }: Props) => {

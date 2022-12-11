@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const suggestionPostImage = atom<string>({
-  key: "suggestion/suggestionPostImage",
+export const suggestionPostImageAtom = atom<string>({
+  key: "suggestion/suggestionPostImageAtom",
   default: "",
 });

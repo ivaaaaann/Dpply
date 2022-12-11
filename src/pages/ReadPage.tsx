@@ -1,7 +1,7 @@
 import Read from "../components/Read/Read";
-import { Suggestion } from "../types/suggestion/suggestion.type";
+import { SuggestionDetail } from "../types/suggestion/suggestion.type";
 
-const TEST: Suggestion = {
+const TEST: SuggestionDetail = {
   id: 1,
   imageUrl: "",
   title: "이거 고쳐주세요",

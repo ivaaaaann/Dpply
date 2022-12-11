@@ -5,12 +5,12 @@ import { MemberRole } from "../../types/member/member.type";
 
 const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
   const AuthCheck = () => {
-    const { data } = useGetMyMember();
+    const { data, isLoading } = useGetMyMember();
 
     const navigate = useNavigate();
 
     useEffect(() => {
-      if (!data) {
+      if (!isLoading && !data) {
         window.alert("불가능한 접근입니다.");
         navigate("/");
       } else {
@@ -23,7 +23,7 @@ const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
           }
         }
       }
-    }, [data]);
+    }, [data, navigate, isLoading]);
 
     return <AuthComponent />;
   };
