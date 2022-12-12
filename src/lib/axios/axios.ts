@@ -19,7 +19,7 @@ const customAxiosErrorHandler = async (config: AxiosError) => {
   const accessToken = token.getToken(ACCESS_TOKEN_KEY);
   const refreshToken = token.getToken(REFRESH_TOKEN_KEY);
 
-  if (accessToken && refreshToken && config.response?.status === 401) {
+  if (accessToken && refreshToken && config.response?.status === 410) {
     try {
       const { data } = await authRepository.postAuthRefresh({ refreshToken });
 

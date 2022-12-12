@@ -119,3 +119,63 @@ export const WriteFormSubmitButton = styled.div`
   cursor: pointer;
   justify-content: center;
 `;
+
+export const WriteFormCategoryWrap = styled.div`
+  width: 100%;
+  height: 58px;
+  border: 1px solid #909090;
+  display: flex;
+  align-items: center;
+  padding: 0px 25px;
+  column-gap: 10px;
+  color: #909090;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: text;
+  position: relative;
+  box-sizing: border-box;
+`;
+
+export const WriteFormCategoryItemWrap = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 64px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #909090;
+  left: -1px;
+`;
+
+export const WriteFormCategoryItem = styled.div`
+  width: 100%;
+  height: 58px;
+  border-bottom: 1px solid #909090;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0px 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  :last-child {
+    border-bottom: 0px;
+  }
+
+  :hover {
+    filter: brightness(98%);
+  }
+`;
+
+export const WriteFormCategoryLabel = styled.div`
+  height: 30px;
+  padding: 0px 10px;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+`;

@@ -1,5 +1,9 @@
 import {
   WriteFormBackButton,
+  WriteFormCategoryItem,
+  WriteFormCategoryLabel,
+  WriteFormCategoryItemWrap,
+  WriteFormCategoryWrap,
   WriteFormContainer,
   WriteFormFileInputIcon,
   WriteFormFileInputLabel,
@@ -15,11 +19,17 @@ import { BsCloudUpload } from "@react-icons/all-files/bs/BsCloudUpload";
 import { useNavigate } from "react-router-dom";
 import useUploadSuggestionImage from "../../../hooks/suggestion/useUploadSuggestionImage";
 import usePostSuggestion from "../../../hooks/suggestion/usePostSuggestion";
+import { useState } from "react";
+import { WRITE_TAG_ITEMS } from "../../../constants/write/write.constant";
+import { SuggestionTag } from "../../../types/suggestion/suggestion.type";
 
 const WriteForm = () => {
   const navigate = useNavigate();
 
-  const { postData, onChangeTextValue } = usePostSuggestion();
+  const [categoryIsClick, setCategoryIsClick] = useState(false);
+
+  const { postData, onChangeTextValue, onChangeCategory, onRemoveCategory } =
+    usePostSuggestion();
 
   const {
     dragHandler,
@@ -38,7 +48,44 @@ const WriteForm = () => {
         name="title"
         onChange={onChangeTextValue}
       />
-      <WriteFormInput placeholder="카테고리를 입력해주세요." />
+      <WriteFormCategoryWrap
+        onClick={(e) => {
+          e.stopPropagation();
+          setCategoryIsClick((prev) => !prev);
+        }}
+      >
+        {postData.tag.length === 0
+          ? "카테고리를 선택해주세요."
+          : postData.tag.map((item) => {
+              const handleCategory = WRITE_TAG_ITEMS.find(
+                (category) => category.type === item
+              );
+
+              return (
+                <WriteFormCategoryLabel
+                  style={{ backgroundColor: handleCategory?.color }}
+                  onClick={() =>
+                    onRemoveCategory(handleCategory?.type as SuggestionTag)
+                  }
+                >
+                  {handleCategory?.title}
+                </WriteFormCategoryLabel>
+              );
+            })}
+        {categoryIsClick && (
+          <WriteFormCategoryItemWrap>
+            {WRITE_TAG_ITEMS.map((item) => (
+              <WriteFormCategoryItem
+                onClick={() => onChangeCategory(item.type as SuggestionTag)}
+              >
+                <WriteFormCategoryLabel style={{ backgroundColor: item.color }}>
+                  {item.title}
+                </WriteFormCategoryLabel>
+              </WriteFormCategoryItem>
+            ))}
+          </WriteFormCategoryItemWrap>
+        )}
+      </WriteFormCategoryWrap>
       <WriteFormFileWrap>
         <input id="WriteFormFileInput" type="file" onChange={onChangeImage} />
         <WriteFormFileInputLabel

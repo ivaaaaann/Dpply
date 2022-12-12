@@ -1,7 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { suggestionPostImageAtom } from "../../store/suggestion/suggestion.store";
-import { Suggestion } from "../../types/suggestion/suggestion.type";
+import {
+  Suggestion,
+  SuggestionTag,
+} from "../../types/suggestion/suggestion.type";
 
 const usePostSuggestion = () => {
   const [postData, setPostData] = useState<Suggestion>({
@@ -25,7 +28,24 @@ const usePostSuggestion = () => {
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
 
-  return { postData, onChangeTextValue };
+  const onChangeCategory = (category: SuggestionTag) => {
+    const isOverlap = postData.tag.find((item) => item === category);
+
+    if (isOverlap) {
+      return;
+    }
+
+    setPostData((prev) => ({ ...prev, tag: [...prev.tag, category] }));
+  };
+
+  const onRemoveCategory = (category: SuggestionTag) => {
+    setPostData((prev) => ({
+      ...prev,
+      tag: prev.tag.filter((item) => item !== category),
+    }));
+  };
+
+  return { postData, onChangeTextValue, onChangeCategory, onRemoveCategory };
 };
 
 export default usePostSuggestion;
