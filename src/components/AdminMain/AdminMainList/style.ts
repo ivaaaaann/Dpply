@@ -36,13 +36,22 @@ export const AdminMainListTbody = styled.tbody`
   width: 100%;
 `;
 
-// export const AdminMainListTh = styled.div`
-//   padding: 0px 50px;
-//   height: 24px;
-//   font-weight: 600;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
+export const AdminMainListAcceptWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 22px;
+`;
 
-// export const AdminMainListTd = styled.div``;
+export const AdminMainListAcceptIcon = styled.div<{ isAccept: boolean }>`
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: ${({ isAccept }) => (isAccept ? "#0FA958" : "#F24E1E")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;

@@ -8,115 +8,19 @@ import { MainProfileContainer, MainProfileItemWrap } from "./style";
 import { BiUser } from "@react-icons/all-files/bi/BiUser";
 import MainProfileHeader from "./MainProfileHeader/MainProfileHeader/MainProfileHeader";
 import MainProfileTab from "./MainProfileTab/MainProfileTab";
-import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
+import { SuggestionStatus } from "../../../types/suggestion/suggestion.type";
 import MainProfileItem from "./MainProfileItem/MainProfileItem";
-
-const TEST: SuggestionPreview[] = [
-  {
-    id: 0,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-  {
-    id: 2,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-  {
-    id: 3,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-  {
-    id: 4,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-  {
-    id: 5,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-  {
-    id: 6,
-    imageUrl: "",
-    user: {
-      email: "ldh165163@gmail.com",
-      grade: 1,
-      name: "임동현",
-      number: 2,
-      profileImage: "",
-      role: "STUDENT",
-      room: 1,
-      uniqueId: "1",
-    },
-    title: "이거 고쳐주세요",
-    createAt: "2022.09.28",
-    tag: ["SCHOOL"],
-  },
-];
+import { useGetMySuggestion } from "../../../quries/suggestion/suggestion.query";
+import { useRecoilValue } from "recoil";
+import { mainProfileTabAtom } from "../../../store/main/main.store";
 
 const MainProfile = () => {
+  const tab = useRecoilValue(mainProfileTabAtom);
+
+  const { data: serverSuggestionsData } = useGetMySuggestion({
+    type: tab as SuggestionStatus,
+  });
+
   return (
     <MainProfileContainer>
       <MainSectionWrap>
@@ -130,7 +34,7 @@ const MainProfile = () => {
       <MainProfileHeader />
       <MainProfileTab />
       <MainProfileItemWrap>
-        {TEST.map((item) => (
+        {serverSuggestionsData?.data.map((item) => (
           <MainProfileItem data={item} key={item.id} />
         ))}
       </MainProfileItemWrap>

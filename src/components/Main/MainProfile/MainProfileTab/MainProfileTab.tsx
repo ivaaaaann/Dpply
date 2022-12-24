@@ -9,10 +9,10 @@ const MainProfileTab = () => {
     <MainProfileTabContainer>
       {MAIN_PROFILE_TAB_ITEM.map((item) => (
         <MainProfileTabItem
-          isSelect={item === tab}
-          onClick={() => setTab(item)}
+          isSelect={item.key === tab}
+          onClick={() => setTab(item.key)}
         >
-          {item}
+          {item.title}
         </MainProfileTabItem>
       ))}
     </MainProfileTabContainer>

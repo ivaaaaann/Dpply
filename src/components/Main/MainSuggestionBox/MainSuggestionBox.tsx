@@ -8,6 +8,7 @@ import { MainSuggestionBoxContainer, MainSuggestionBoxItemWrap } from "./style";
 import { BsEnvelope } from "@react-icons/all-files/bs/BsEnvelope";
 import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
 import MainSuggestionItem from "./MainSuggestionItem/MainSuggestionItem";
+import { useGetSuggestions } from "../../../quries/suggestion/suggestion.query";
 
 const TEST: SuggestionPreview[] = [
   {
@@ -115,6 +116,10 @@ const TEST: SuggestionPreview[] = [
 ];
 
 const MainSuggestionBox = () => {
+  const { data: serverSuggestionsData } = useGetSuggestions({
+    type: "WAITING",
+  });
+
   return (
     <MainSuggestionBoxContainer>
       <MainSectionWrap>
@@ -126,7 +131,7 @@ const MainSuggestionBox = () => {
         </MainSectionTextWrap>
       </MainSectionWrap>
       <MainSuggestionBoxItemWrap>
-        {TEST.map((suggestion) => (
+        {serverSuggestionsData?.data.map((suggestion) => (
           <MainSuggestionItem data={suggestion} />
         ))}
       </MainSuggestionBoxItemWrap>

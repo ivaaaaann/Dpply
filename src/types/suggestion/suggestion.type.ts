@@ -13,9 +13,11 @@ export interface SuggestionDetail extends Suggestion {
   createAt: string;
   updateAt: string;
   sympathyCount: number;
-  status: "REFUSE" | "SOLVED";
+  status: SuggestionStatus;
   user: Member;
 }
+
+export type SuggestionStatus = "REFUSE" | "SOLVED" | "WAITING";
 
 export type SuggestionTag = "SCHOOL" | "DORMITORY" | "CAFETERIA";
 
@@ -25,6 +27,14 @@ export type SuggestionPreview = Omit<
 >;
 
 export interface suggestionsResponse extends Response {
+  data: SuggestionPreview[];
+}
+
+export interface mySuggestionsResponse extends Response {
+  data: SuggestionPreview[];
+}
+
+export interface suggestionsByPageResponse extends Response {
   isLast: boolean;
   data: SuggestionPreview[];
 }

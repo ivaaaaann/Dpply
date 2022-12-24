@@ -17,7 +17,10 @@ const TEST: any[] = [
 
 const ProfileTagList = () => {
   const { search } = useLocation();
-  const currentTag = decodeURI(queryStringParser(search).tag);
+
+  const currentTag = decodeURI(
+    queryStringParser(search === "" ? "?tag=전체조회" : search).tag
+  );
   const navigate = useNavigate();
 
   return (

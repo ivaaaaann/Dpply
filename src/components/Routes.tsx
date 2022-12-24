@@ -21,7 +21,7 @@ const Routes = () => {
       <Route path="/loading" element={<AuthLoadingPage />} />
       <Route path="/write" element={<AuthWritePage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/admin" element={<AdminMainPage />} />
+      <Route path="/admin" element={<AuthAdminMainPage />} />
     </Switch>
   );
 };

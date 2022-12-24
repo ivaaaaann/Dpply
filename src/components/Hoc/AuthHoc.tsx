@@ -1,4 +1,4 @@
-import { ComponentType, useEffect } from "react";
+import { ComponentType, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetMyMember } from "../../quries/member/member.query";
 import { MemberRole } from "../../types/member/member.type";
@@ -6,26 +6,29 @@ import { MemberRole } from "../../types/member/member.type";
 const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
   const AuthCheck = () => {
     const { data, isLoading } = useGetMyMember();
-
     const navigate = useNavigate();
+    const [isUnauthorized, setIsUnauthorized] = useState(true);
+
+    console.log(isUnauthorized);
 
     useEffect(() => {
       if (!isLoading && !data) {
         window.alert("불가능한 접근입니다.");
+        setIsUnauthorized(true);
         navigate("/");
-      } else {
-        if (data) {
-          const { role: memberRole } = data.data;
-
-          if (memberRole === "STUDENT" && role === "ADMIN") {
-            window.alert("불가능한 접근입니다.");
-            navigate("/");
-          }
+      } else if (data) {
+        const { role: memberRole } = data.data;
+        if (memberRole === "STUDENT" && role === "ADMIN") {
+          window.alert("불가능한 접근입니다.");
+          setIsUnauthorized(true);
+          navigate("/");
+        } else {
+          setIsUnauthorized(false);
         }
       }
     }, [data, navigate, isLoading]);
 
-    return <AuthComponent />;
+    return <>{isUnauthorized ? <>loading...</> : <AuthComponent />}</>;
   };
 
   return AuthCheck;

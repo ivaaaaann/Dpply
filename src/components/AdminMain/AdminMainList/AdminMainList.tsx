@@ -1,5 +1,7 @@
 import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
 import {
+  AdminMainListAcceptIcon,
+  AdminMainListAcceptWrap,
   AdminMainListContainer,
   AdminMainListTbody,
   AdminMainListTd,
@@ -7,6 +9,8 @@ import {
   AdminMainListThead,
   AdminMainListTr,
 } from "./style";
+import { HiCheck } from "@react-icons/all-files/hi/HiCheck";
+import { CgClose } from "@react-icons/all-files/cg/CgClose";
 
 const TEST: SuggestionPreview[] = [
   {
@@ -136,7 +140,16 @@ const AdminMainList = () => {
             <AdminMainListTd>{item.user.name}</AdminMainListTd>
             <AdminMainListTd>1118</AdminMainListTd>
             <AdminMainListTd>{item.createAt}</AdminMainListTd>
-            <AdminMainListTd></AdminMainListTd>
+            <AdminMainListTd>
+              <AdminMainListAcceptWrap>
+                <AdminMainListAcceptIcon isAccept={true}>
+                  <HiCheck />
+                </AdminMainListAcceptIcon>
+                <AdminMainListAcceptIcon isAccept={false}>
+                  <CgClose />
+                </AdminMainListAcceptIcon>
+              </AdminMainListAcceptWrap>
+            </AdminMainListTd>
           </AdminMainListTr>
         ))}
       </AdminMainListTbody>

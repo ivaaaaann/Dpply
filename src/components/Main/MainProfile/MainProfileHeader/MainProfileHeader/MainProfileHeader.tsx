@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import useAuthCheck from "../../../../../hooks/auth/useAuthCheck";
 import { useGetMyMember } from "../../../../../quries/member/member.query";
 import {
@@ -10,13 +11,18 @@ import {
 
 const MainProfileHeader = () => {
   const { data, isLogin } = useAuthCheck();
+  const navigate = useNavigate();
 
   return (
     <MainProfileHeaderContainer>
       <MainProfileHeaderImg />
       {isLogin ? (
         <MainProfileHeaderInfoWrap>
-          <MainProfileHeaderName>{data?.data.name}</MainProfileHeaderName>
+          <MainProfileHeaderName
+            onClick={() => navigate("/profile?tag=전체조회")}
+          >
+            {data?.data.name}
+          </MainProfileHeaderName>
           <MainProfileHeaderClass>
             {data?.data.grade}학년 {data?.data.room}반 {data?.data.number}번
           </MainProfileHeaderClass>
