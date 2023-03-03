@@ -1,15 +1,13 @@
 import { ComponentType, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetMyMember } from "../../quries/member/member.query";
+import { useGetMyMemberQuery } from "../../quries/member/member.query";
 import { MemberRole } from "../../types/member/member.type";
 
 const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
   const AuthCheck = () => {
-    const { data, isLoading } = useGetMyMember();
+    const { data, isLoading, isError } = useGetMyMemberQuery();
     const navigate = useNavigate();
     const [isUnauthorized, setIsUnauthorized] = useState(true);
-
-    console.log(isUnauthorized);
 
     useEffect(() => {
       if (!isLoading && !data) {

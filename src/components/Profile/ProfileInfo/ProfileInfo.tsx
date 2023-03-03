@@ -1,3 +1,4 @@
+import { useGetMyMemberQuery } from "../../../quries/member/member.query";
 import ProfileTagList from "./ProfileTagList/ProfileTagList";
 import {
   ProfileInfoClass,
@@ -9,6 +10,8 @@ import {
 } from "./style";
 
 const ProfileInfo = () => {
+  const { data: serverMyMemberData } = useGetMyMemberQuery();
+
   return (
     <ProfileInfoContainer>
       <ProfileInfoWrap>

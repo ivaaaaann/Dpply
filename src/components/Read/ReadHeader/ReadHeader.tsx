@@ -1,101 +1,99 @@
 import { useState } from "react";
-import {
-  ReadHeaderContentWrap,
-  ReadHeaderContainer,
-  ReadHeaderLikeButton,
-  ReadHeaderLikeButtonIcon,
-  ReadHeaderLikeButtonText,
-  ReadHeaderProfileClass,
-  ReadHeaderProfileImg,
-  ReadHeaderProfileName,
-  ReadHeaderProfileTextWrap,
-  ReadHeaderProfileWrap,
-  ReadHeaderContentLeftWrap,
-  ReadHeaderContentLeftTitleWrap,
-  ReadHeaderContentLeftTitle,
-  ReadHeaderContentLeftTagWrap,
-  ReadHeaderContentLeftTag,
-  ReadHeaderContentLeftContent,
-  ReadHeaderContentRightImg,
-  ReadHeaderContentLeftBottomWrap,
-  ReadHeaderContentLeftBottomCreatedAt,
-  ReadHeaderContentLeftBottomInfoWrap,
-  ReadHeaderContentLeftBottomInfoItemWrap,
-  ReadHeaderContentLeftBottomInfoItemIcon,
-  ReadHeaderContentLeftBottomInfoItemText,
-} from "./style";
+import * as S from "./style";
 import { AiFillLike } from "@react-icons/all-files/ai/AiFillLike";
 import { AiOutlineLike } from "@react-icons/all-files/ai/AiOutlineLike";
 import { GoComment } from "@react-icons/all-files/go/GoComment";
-import { SuggestionDetail } from "../../../types/suggestion/suggestion.type";
 import dataTransform from "../../../utils/transform/dataTransform";
+import { useParams } from "react-router-dom";
+import {
+  useGetSuggestionQuery,
+  useGetSuggestionCommentsQuery,
+} from "../../../quries/suggestion/suggestion.query";
+import useLikeSuggestion from "../../../hooks/suggestion/useLikeSuggestion";
+import { useGetMyMemberQuery } from "../../../quries/member/member.query";
 
-interface Props {
-  data: SuggestionDetail;
-}
+const ReadHeader = () => {
+  const { id } = useParams();
 
-const ReadHeader = ({ data }: Props) => {
-  const [isClick, setIsClick] = useState(false);
+  const { data: serverSuggestionData } = useGetSuggestionQuery({
+    id: Number(id),
+  });
+  const { data: serverCommentsData } = useGetSuggestionCommentsQuery({
+    id: Number(id),
+  });
+  const { data: serverMyMemberData } = useGetMyMemberQuery();
+
+  const { isLike, likeCount, onToggleIsLike } = useLikeSuggestion({
+    prevIsLike: !!serverSuggestionData?.data.sympathyUser.find(
+      (user) => user.uniqueId === serverMyMemberData?.data.uniqueId
+    ),
+    id: Number(id),
+    prevLikeCount: serverSuggestionData?.data.sympathyCount || 0,
+  });
 
   return (
-    <ReadHeaderContainer>
-      <ReadHeaderProfileWrap>
-        <ReadHeaderProfileImg />
-        <ReadHeaderProfileTextWrap>
-          <ReadHeaderProfileName>{data.user.name}</ReadHeaderProfileName>
-          <ReadHeaderProfileClass>1학년 1반 18번</ReadHeaderProfileClass>
-        </ReadHeaderProfileTextWrap>
-        <ReadHeaderLikeButton isClick={isClick}>
-          <ReadHeaderLikeButtonIcon>
+    <S.ReadHeaderContainer>
+      <S.ReadHeaderProfileWrap>
+        <S.ReadHeaderProfileImg
+          src={serverSuggestionData?.data.user.profileImage}
+        />
+        <S.ReadHeaderProfileTextWrap>
+          <S.ReadHeaderProfileName>
+            {serverSuggestionData?.data.user.name}
+          </S.ReadHeaderProfileName>
+          <S.ReadHeaderProfileClass>{`${serverSuggestionData?.data.user.grade}학년 ${serverSuggestionData?.data.user.room}반 ${serverSuggestionData?.data.user.number}번`}</S.ReadHeaderProfileClass>
+        </S.ReadHeaderProfileTextWrap>
+        <S.ReadHeaderLikeButton isLike={isLike} onClick={onToggleIsLike}>
+          <S.ReadHeaderLikeButtonIcon>
             <AiFillLike />
-          </ReadHeaderLikeButtonIcon>
-          <ReadHeaderLikeButtonText>
-            {data.sympathyCount}
-          </ReadHeaderLikeButtonText>
-        </ReadHeaderLikeButton>
-      </ReadHeaderProfileWrap>
-      <ReadHeaderContentWrap>
-        <ReadHeaderContentLeftWrap>
-          <ReadHeaderContentLeftTitleWrap>
-            <ReadHeaderContentLeftTitle>
-              {data.title}
-            </ReadHeaderContentLeftTitle>
-            <ReadHeaderContentLeftTagWrap>
-              {data.tag.map((tag) => (
-                <ReadHeaderContentLeftTag>
-                  #{dataTransform.tagTransform(tag)}
-                </ReadHeaderContentLeftTag>
-              ))}
-            </ReadHeaderContentLeftTagWrap>
-          </ReadHeaderContentLeftTitleWrap>
-          <ReadHeaderContentLeftContent>
-            {data.text}
-          </ReadHeaderContentLeftContent>
-          <ReadHeaderContentLeftBottomWrap>
-            <ReadHeaderContentLeftBottomCreatedAt>
-              {data.createAt}
-            </ReadHeaderContentLeftBottomCreatedAt>
-            <ReadHeaderContentLeftBottomInfoWrap>
-              <ReadHeaderContentLeftBottomInfoItemWrap>
-                <ReadHeaderContentLeftBottomInfoItemIcon>
+          </S.ReadHeaderLikeButtonIcon>
+          <S.ReadHeaderLikeButtonText>{likeCount}</S.ReadHeaderLikeButtonText>
+        </S.ReadHeaderLikeButton>
+      </S.ReadHeaderProfileWrap>
+      <S.ReadHeaderContentWrap>
+        <S.ReadHeaderContentLeftWrap>
+          <S.ReadHeaderContentLeftTitleWrap>
+            <S.ReadHeaderContentLeftTitle>
+              {serverSuggestionData?.data.title}
+            </S.ReadHeaderContentLeftTitle>
+            <S.ReadHeaderContentLeftTagWrap>
+              {serverSuggestionData && (
+                <S.ReadHeaderContentLeftTag>
+                  #{dataTransform.tagTransform(serverSuggestionData?.data.tag)}
+                </S.ReadHeaderContentLeftTag>
+              )}
+            </S.ReadHeaderContentLeftTagWrap>
+          </S.ReadHeaderContentLeftTitleWrap>
+          <S.ReadHeaderContentLeftContent>
+            {serverSuggestionData?.data.text}
+          </S.ReadHeaderContentLeftContent>
+          <S.ReadHeaderContentLeftBottomWrap>
+            <S.ReadHeaderContentLeftBottomCreatedAt>
+              {serverSuggestionData?.data.createAt}
+            </S.ReadHeaderContentLeftBottomCreatedAt>
+            <S.ReadHeaderContentLeftBottomInfoWrap>
+              <S.ReadHeaderContentLeftBottomInfoItemWrap>
+                <S.ReadHeaderContentLeftBottomInfoItemIcon>
                   <AiOutlineLike />
-                </ReadHeaderContentLeftBottomInfoItemIcon>
-                <ReadHeaderContentLeftBottomInfoItemText>
-                  {data.sympathyCount}
-                </ReadHeaderContentLeftBottomInfoItemText>
-                <ReadHeaderContentLeftBottomInfoItemIcon>
+                </S.ReadHeaderContentLeftBottomInfoItemIcon>
+                <S.ReadHeaderContentLeftBottomInfoItemText>
+                  {likeCount}
+                </S.ReadHeaderContentLeftBottomInfoItemText>
+                <S.ReadHeaderContentLeftBottomInfoItemIcon>
                   <GoComment />
-                </ReadHeaderContentLeftBottomInfoItemIcon>
-                <ReadHeaderContentLeftBottomInfoItemText>
-                  4
-                </ReadHeaderContentLeftBottomInfoItemText>
-              </ReadHeaderContentLeftBottomInfoItemWrap>
-            </ReadHeaderContentLeftBottomInfoWrap>
-          </ReadHeaderContentLeftBottomWrap>
-        </ReadHeaderContentLeftWrap>
-        <ReadHeaderContentRightImg />
-      </ReadHeaderContentWrap>
-    </ReadHeaderContainer>
+                </S.ReadHeaderContentLeftBottomInfoItemIcon>
+                <S.ReadHeaderContentLeftBottomInfoItemText>
+                  {serverCommentsData?.data.length}
+                </S.ReadHeaderContentLeftBottomInfoItemText>
+              </S.ReadHeaderContentLeftBottomInfoItemWrap>
+            </S.ReadHeaderContentLeftBottomInfoWrap>
+          </S.ReadHeaderContentLeftBottomWrap>
+        </S.ReadHeaderContentLeftWrap>
+        <S.ReadHeaderContentRightImg
+          src={serverSuggestionData?.data.imageUrl}
+        />
+      </S.ReadHeaderContentWrap>
+    </S.ReadHeaderContainer>
   );
 };
 

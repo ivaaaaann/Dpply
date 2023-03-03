@@ -1,15 +1,22 @@
+import { useParams } from "react-router-dom";
+import { useGetSuggestionCommentsQuery } from "../../../../quries/suggestion/suggestion.query";
 import ReadCommentListItem from "./ReadCommentListItem/ReadCommentListItem";
 import { ReadCommentListContainer } from "./style";
 
-interface Props {
-  data: string[];
-}
+const ReadCommentList = () => {
+  const { id } = useParams();
 
-const ReadCommentList = ({ data }: Props) => {
+  const { data: serverCommentsData } = useGetSuggestionCommentsQuery({
+    id: Number(id),
+  });
+
   return (
     <ReadCommentListContainer>
-      {data.map((comment, idx) => (
-        <ReadCommentListItem isLast={data.length - 1 === idx} />
+      {serverCommentsData?.data.map((comment, idx, total) => (
+        <ReadCommentListItem
+          comment={comment}
+          isLast={total.length - 1 === idx}
+        />
       ))}
     </ReadCommentListContainer>
   );

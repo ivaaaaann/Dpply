@@ -2,15 +2,11 @@ import ReadCommentForm from "./ReadCommentForm/ReadCommentForm";
 import ReadCommentList from "./ReadCommentList/ReadCommentList";
 import { ReadCommentContainer } from "./style";
 
-interface Props {
-  data: string[];
-}
-
-const ReadComment = ({ data }: Props) => {
+const ReadComment = () => {
   return (
     <ReadCommentContainer>
       <ReadCommentForm />
-      <ReadCommentList data={data} />
+      <ReadCommentList />
     </ReadCommentContainer>
   );
 };

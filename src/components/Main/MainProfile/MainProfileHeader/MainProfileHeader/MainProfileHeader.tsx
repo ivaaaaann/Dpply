@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import useAuthCheck from "../../../../../hooks/auth/useAuthCheck";
-import { useGetMyMember } from "../../../../../quries/member/member.query";
 import {
   MainProfileHeaderClass,
   MainProfileHeaderContainer,

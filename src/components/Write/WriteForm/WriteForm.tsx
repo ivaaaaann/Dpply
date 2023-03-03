@@ -12,23 +12,26 @@ import {
   WriteFormInput,
   WriteFormSubmitButton,
   WriteFormSubmitWrap,
-  WriteFormText,
+  WriteFormFileInputText,
   WriteFormTextarea,
+  WriteFormFileImage,
 } from "./style";
 import { BsCloudUpload } from "@react-icons/all-files/bs/BsCloudUpload";
 import { useNavigate } from "react-router-dom";
 import useUploadSuggestionImage from "../../../hooks/suggestion/useUploadSuggestionImage";
 import usePostSuggestion from "../../../hooks/suggestion/usePostSuggestion";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { WRITE_TAG_ITEMS } from "../../../constants/write/write.constant";
 import { SuggestionTag } from "../../../types/suggestion/suggestion.type";
+import { useRecoilValue } from "recoil";
+import { suggestionPostImageAtom } from "../../../store/suggestion/suggestion.store";
 
 const WriteForm = () => {
   const navigate = useNavigate();
 
   const [categoryIsClick, setCategoryIsClick] = useState(false);
 
-  const { postData, onChangeTextValue, onChangeCategory, onRemoveCategory } =
+  const { postData, onChangeTextValue, onChangeCategory, onSubmitSuggestion } =
     usePostSuggestion();
 
   const {
@@ -39,6 +42,12 @@ const WriteForm = () => {
     dropHandler,
     isDrag,
   } = useUploadSuggestionImage();
+
+  const image = useRecoilValue(suggestionPostImageAtom);
+
+  const selectedCategory = useMemo(() => {
+    return WRITE_TAG_ITEMS.find((item) => item.type === postData.tag);
+  }, [postData.tag]);
 
   return (
     <WriteFormContainer>
@@ -54,24 +63,12 @@ const WriteForm = () => {
           setCategoryIsClick((prev) => !prev);
         }}
       >
-        {postData.tag.length === 0
-          ? "카테고리를 선택해주세요."
-          : postData.tag.map((item) => {
-              const handleCategory = WRITE_TAG_ITEMS.find(
-                (category) => category.type === item
-              );
+        <WriteFormCategoryLabel
+          style={{ backgroundColor: selectedCategory?.color }}
+        >
+          {selectedCategory?.title}
+        </WriteFormCategoryLabel>
 
-              return (
-                <WriteFormCategoryLabel
-                  style={{ backgroundColor: handleCategory?.color }}
-                  onClick={() =>
-                    onRemoveCategory(handleCategory?.type as SuggestionTag)
-                  }
-                >
-                  {handleCategory?.title}
-                </WriteFormCategoryLabel>
-              );
-            })}
         {categoryIsClick && (
           <WriteFormCategoryItemWrap>
             {WRITE_TAG_ITEMS.map((item) => (
@@ -88,25 +85,31 @@ const WriteForm = () => {
       </WriteFormCategoryWrap>
       <WriteFormFileWrap>
         <input id="WriteFormFileInput" type="file" onChange={onChangeImage} />
-        <WriteFormFileInputLabel
-          draggable={true}
-          htmlFor="WriteFormFileInput"
-          onDrop={dropHandler}
-          onDragOver={dragHandler}
-          onDragLeave={dragOutHandler}
-          onDragEnter={dragInHandler}
-        >
-          <WriteFormFileInputTextWrap>
-            <WriteFormFileInputIcon>
-              <BsCloudUpload />
-            </WriteFormFileInputIcon>
-            <WriteFormText>
-              드래그 앤 드롭
-              <br /> 또는
-              <strong>업로드</strong>
-            </WriteFormText>
-          </WriteFormFileInputTextWrap>
-        </WriteFormFileInputLabel>
+        <>
+          {image === "" ? (
+            <WriteFormFileInputLabel
+              draggable={true}
+              htmlFor="WriteFormFileInput"
+              onDrop={dropHandler}
+              onDragOver={dragHandler}
+              onDragLeave={dragOutHandler}
+              onDragEnter={dragInHandler}
+            >
+              <WriteFormFileInputTextWrap>
+                <WriteFormFileInputIcon>
+                  <BsCloudUpload />
+                </WriteFormFileInputIcon>
+                <WriteFormFileInputText>
+                  드래그 앤 드롭
+                  <br /> 또는
+                  <strong>업로드</strong>
+                </WriteFormFileInputText>
+              </WriteFormFileInputTextWrap>
+            </WriteFormFileInputLabel>
+          ) : (
+            <WriteFormFileImage src={image} />
+          )}
+        </>
         <WriteFormTextarea
           placeholder="건의할 내용을 입력해주세요"
           onChange={onChangeTextValue}
@@ -118,7 +121,9 @@ const WriteForm = () => {
         <WriteFormBackButton onClick={() => navigate(-1)}>
           돌아가기
         </WriteFormBackButton>
-        <WriteFormSubmitButton>확인</WriteFormSubmitButton>
+        <WriteFormSubmitButton onClick={onSubmitSuggestion}>
+          확인
+        </WriteFormSubmitButton>
       </WriteFormSubmitWrap>
     </WriteFormContainer>
   );

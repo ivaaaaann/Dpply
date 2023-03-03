@@ -26,11 +26,9 @@ const ProfileListItem = ({ data }: Props) => {
         <ProfileListItemMiddleName>{data.user.name}</ProfileListItemMiddleName>
         <ProfileListItemMiddleTitle>{data.title}</ProfileListItemMiddleTitle>
         <ProfileListItemMiddleTagWrap>
-          {data.tag.map((tag) => (
-            <ProfileListItemTag>
-              #{dataTransform.tagTransform(tag)}
-            </ProfileListItemTag>
-          ))}
+          <ProfileListItemTag>
+            #{dataTransform.tagTransform(data.tag)}
+          </ProfileListItemTag>
         </ProfileListItemMiddleTagWrap>
       </ProfileListItemMiddleWrap>
       <ProfileListItemRightWrap>

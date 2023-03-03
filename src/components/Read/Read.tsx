@@ -3,16 +3,12 @@ import ReadComment from "./ReadComment/ReadComment";
 import ReadHeader from "./ReadHeader/ReadHeader";
 import { ReadContainer, ReadWrap } from "./style";
 
-interface Props {
-  data: SuggestionDetail;
-}
-
-const Read = ({ data }: Props) => {
+const Read = () => {
   return (
     <ReadContainer>
       <ReadWrap>
-        <ReadHeader data={data} />
-        <ReadComment data={["asdasd", "sdadda", "Adsd"]} />
+        <ReadHeader />
+        <ReadComment />
       </ReadWrap>
     </ReadContainer>
   );

@@ -28,11 +28,9 @@ const MainProfileItem = ({ data }: Props) => {
         </MainProfileItemContentName>
         <MainProfileItemContentTitle>{data.title}</MainProfileItemContentTitle>
         <MainProfileItemContentTagWrap>
-          {data.tag.map((tag, idx) => (
-            <MainProfileItemContentTagText key={idx}>
-              #{dataTransform.tagTransform(tag)}
-            </MainProfileItemContentTagText>
-          ))}
+          <MainProfileItemContentTagText>
+            #{dataTransform.tagTransform(data.tag)}
+          </MainProfileItemContentTagText>
         </MainProfileItemContentTagWrap>
       </MainProfileItemContentWrap>
       <MainProfileItemContentCreatedAt>

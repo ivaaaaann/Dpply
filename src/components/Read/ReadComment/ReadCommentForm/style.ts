@@ -15,7 +15,7 @@ export const ReadCommentFormProfileImg = styled.img`
   background-color: #f2f2f2;
 `;
 
-export const ReadCommentFormInputWrap = styled.div`
+export const ReadCommentFormInputWrap = styled.form`
   width: 100%;
   height: 80px;
   border: 1px solid #c9c9c9;

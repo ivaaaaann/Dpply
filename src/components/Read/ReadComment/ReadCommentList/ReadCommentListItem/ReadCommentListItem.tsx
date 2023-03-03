@@ -1,3 +1,4 @@
+import { SuggestionComment } from "../../../../../types/suggestion/suggestion.type";
 import {
   ReadCommentListItemTextRoot,
   ReadCommentListItemContainer,
@@ -9,30 +10,30 @@ import {
   ReadCommentListItemTextWrap,
   ReadCommentListItemText,
 } from "./style";
+import Timecounting from "time-counting";
 
 interface Props {
+  comment: SuggestionComment;
   isLast: boolean;
 }
 
-const ReadCommentListItem = ({ isLast }: Props) => {
+const ReadCommentListItem = ({ comment, isLast }: Props) => {
   return (
     <ReadCommentListItemContainer>
       <ReadCommentListItemProfileWrap>
-        <ReadCommentListItemProfileImg />
+        <ReadCommentListItemProfileImg src={comment.user.profileImage} />
         <ReadCommentListItemProfileTextWrap>
           <ReadCommentListItemProfileName>
-            최희건
+            {comment?.user.name}
           </ReadCommentListItemProfileName>
           <ReadCommentListItemProfileCreatedAt>
-            23분전
+            {Timecounting(comment.createAt, { lang: "ko" })}
           </ReadCommentListItemProfileCreatedAt>
         </ReadCommentListItemProfileTextWrap>
       </ReadCommentListItemProfileWrap>
       <ReadCommentListItemTextWrap>
         <ReadCommentListItemTextRoot isLast={isLast} />
-        <ReadCommentListItemText>
-          매우매우 고쳐야한다고 생각을 합니다.
-        </ReadCommentListItemText>
+        <ReadCommentListItemText>{comment.comment}</ReadCommentListItemText>
       </ReadCommentListItemTextWrap>
     </ReadCommentListItemContainer>
   );

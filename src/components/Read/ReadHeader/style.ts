@@ -40,7 +40,7 @@ export const ReadHeaderProfileClass = styled.p`
   line-height: 29px;
 `;
 
-export const ReadHeaderLikeButton = styled.button<{ isClick: boolean }>`
+export const ReadHeaderLikeButton = styled.button<{ isLike: boolean }>`
   width: 100px;
   height: 50px;
   border-radius: 100px;
@@ -54,8 +54,8 @@ export const ReadHeaderLikeButton = styled.button<{ isClick: boolean }>`
   margin-top: auto;
   cursor: pointer;
 
-  ${({ isClick }) =>
-    isClick
+  ${({ isLike }) =>
+    isLike
       ? css`
           background-color: ${palette.main};
           color: white;

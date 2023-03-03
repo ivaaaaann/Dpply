@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
@@ -15,6 +15,22 @@ export const customAxios = axios.create({
   },
 });
 
+const customAxiosRequestHandler = (config: AxiosRequestConfig) => {
+  if (
+    token.getToken(ACCESS_TOKEN_KEY) !== undefined &&
+    token.getToken(REFRESH_TOKEN_KEY) !== undefined
+  ) {
+    config.headers = {
+      [REQUEST_TOKEN_KEY]: `Bearer ${token.getToken(ACCESS_TOKEN_KEY)}`,
+    };
+  } else {
+    window.alert("토큰이 존재하지 않습니다.");
+    window.location.href = "http://localhost:3000/auth";
+  }
+
+  return config;
+};
+
 const customAxiosErrorHandler = async (config: AxiosError) => {
   const accessToken = token.getToken(ACCESS_TOKEN_KEY);
   const refreshToken = token.getToken(REFRESH_TOKEN_KEY);
@@ -24,14 +40,16 @@ const customAxiosErrorHandler = async (config: AxiosError) => {
       const { data } = await authRepository.postAuthRefresh({ refreshToken });
 
       token.setToken(ACCESS_TOKEN_KEY, data);
-      customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = data;
+      customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${data}`;
     } catch (error) {
       window.alert("세션만료");
       token.clearToken();
-      window.location.href = "http://localhost:3000/";
+      window.location.href = "http://localhost:3000/auth";
     }
   }
 };
+
+customAxios.interceptors.request.use(customAxiosRequestHandler);
 
 customAxios.interceptors.response.use(
   (response) => response,

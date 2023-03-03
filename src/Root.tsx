@@ -6,7 +6,13 @@ import PageTemplate from "./components/Common/PageTemplate/PageTemplate";
 import GlobalStyle from "./styles/globalStyle";
 
 const Root = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -28,11 +28,9 @@ const MainSuggestionItem = ({ data }: Props) => {
           {data.title}
         </MainSuggestionItemContentTitle>
         <MainSuggestionItemContentTagWrap>
-          {data.tag.map((tag, idx) => (
-            <MainSuggestionItemContentTagText key={idx}>
-              #{dataTransform.tagTransform(tag)}
-            </MainSuggestionItemContentTagText>
-          ))}
+          <MainSuggestionItemContentTagText>
+            #{dataTransform.tagTransform(data.tag)}
+          </MainSuggestionItemContentTagText>
         </MainSuggestionItemContentTagWrap>
       </MainSuggestionItemContentWrap>
       <MainSuggestionItemCreatedAt>{data.createAt}</MainSuggestionItemCreatedAt>

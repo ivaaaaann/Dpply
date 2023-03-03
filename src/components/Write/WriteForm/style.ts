@@ -61,7 +61,7 @@ export const WriteFormFileInputIcon = styled.div`
   color: #909090;
 `;
 
-export const WriteFormText = styled.p`
+export const WriteFormFileInputText = styled.p`
   font-size: 24px;
   line-height: 29px;
   color: #909090;
@@ -72,6 +72,15 @@ export const WriteFormText = styled.p`
     color: ${palette.main};
     text-decoration: underline;
   }
+`;
+
+export const WriteFormFileImage = styled.img`
+  min-width: 550px;
+  max-width: 550px;
+  height: 550px;
+  border-radius: 10px;
+  object-fit: scale-down;
+  border: 2px solid #909090;
 `;
 
 export const WriteFormTextarea = styled.textarea`
@@ -134,6 +143,7 @@ export const WriteFormCategoryWrap = styled.div`
   cursor: text;
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const WriteFormCategoryItemWrap = styled.div`

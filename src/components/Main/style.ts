@@ -40,6 +40,7 @@ export const MainWrap = styled.div`
   width: 100%;
   height: 675px;
   display: flex;
+  justify-content: center;
   padding: 0px 200px;
   padding-top: 43px;
   padding-bottom: 68px;

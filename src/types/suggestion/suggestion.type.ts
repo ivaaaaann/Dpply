@@ -1,10 +1,9 @@
 import { Member } from "../member/member.type";
-import { Response } from "../util/response.type";
 
 export interface Suggestion {
   title: string;
   text: string;
-  tag: SuggestionTag[];
+  tag: SuggestionTag;
   imageUrl: string;
 }
 
@@ -13,7 +12,16 @@ export interface SuggestionDetail extends Suggestion {
   createAt: string;
   updateAt: string;
   sympathyCount: number;
+  sympathyUser: Member[];
   status: SuggestionStatus;
+  user: Member;
+}
+
+export interface SuggestionComment {
+  comment: string;
+  createAt: string;
+  id: number;
+  positing: SuggestionDetail;
   user: Member;
 }
 
@@ -25,16 +33,3 @@ export type SuggestionPreview = Omit<
   SuggestionDetail,
   "text" | "updateAt" | "sympathyCount" | "sympathyList" | "status"
 >;
-
-export interface suggestionsResponse extends Response {
-  data: SuggestionPreview[];
-}
-
-export interface mySuggestionsResponse extends Response {
-  data: SuggestionPreview[];
-}
-
-export interface suggestionsByPageResponse extends Response {
-  isLast: boolean;
-  data: SuggestionPreview[];
-}

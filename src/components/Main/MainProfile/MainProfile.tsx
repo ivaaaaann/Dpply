@@ -10,14 +10,14 @@ import MainProfileHeader from "./MainProfileHeader/MainProfileHeader/MainProfile
 import MainProfileTab from "./MainProfileTab/MainProfileTab";
 import { SuggestionStatus } from "../../../types/suggestion/suggestion.type";
 import MainProfileItem from "./MainProfileItem/MainProfileItem";
-import { useGetMySuggestion } from "../../../quries/suggestion/suggestion.query";
+import { useGetMySuggestionQuery } from "../../../quries/suggestion/suggestion.query";
 import { useRecoilValue } from "recoil";
 import { mainProfileTabAtom } from "../../../store/main/main.store";
 
 const MainProfile = () => {
   const tab = useRecoilValue(mainProfileTabAtom);
 
-  const { data: serverSuggestionsData } = useGetMySuggestion({
+  const { data: serverSuggestionsData } = useGetMySuggestionQuery({
     type: tab as SuggestionStatus,
   });
 

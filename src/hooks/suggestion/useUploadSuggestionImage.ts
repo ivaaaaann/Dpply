@@ -1,10 +1,12 @@
 import { ChangeEvent, DragEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
+import { usePostUploadMutation } from "../../quries/upload/upload.query";
 import { suggestionPostImageAtom } from "../../store/suggestion/suggestion.store";
 
 const useUploadSuggestionImage = () => {
   const [isDrag, setIsDrag] = useState(false);
   const [image, setImage] = useRecoilState(suggestionPostImageAtom);
+  const postUploadMutation = usePostUploadMutation();
 
   const onChangeImage = useCallback(
     (e: ChangeEvent<HTMLInputElement> | any) => {
@@ -15,9 +17,21 @@ const useUploadSuggestionImage = () => {
         image = e.target.files[0];
       }
       const formData = new FormData();
-      formData.append("img", image);
+      formData.append("file", image);
+
+      postUploadMutation.mutate(
+        { formData },
+        {
+          onSuccess: (data) => {
+            setImage(data.data);
+          },
+          onError: () => {
+            setImage("");
+          },
+        }
+      );
     },
-    []
+    [postUploadMutation, setImage]
   );
 
   const dropHandler = useCallback(
