@@ -29,7 +29,7 @@ const MainSuggestionItem = ({ data }: Props) => {
         </MainSuggestionItemContentTitle>
         <MainSuggestionItemContentTagWrap>
           <MainSuggestionItemContentTagText>
-            #{dataTransform.tagTransform(data.tag)}
+            #{dataTransform.tagTransformToKorean(data.tag)}
           </MainSuggestionItemContentTagText>
         </MainSuggestionItemContentTagWrap>
       </MainSuggestionItemContentWrap>

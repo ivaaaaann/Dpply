@@ -15,10 +15,12 @@ const ProfileInfo = () => {
   return (
     <ProfileInfoContainer>
       <ProfileInfoWrap>
-        <ProfileInfoImg />
+        <ProfileInfoImg src={serverMyMemberData?.data.profileImage} />
         <ProfileInfoTextWrap>
-          <ProfileInfoName>임동현</ProfileInfoName>
-          <ProfileInfoClass>1학년 2반 3번</ProfileInfoClass>
+          <ProfileInfoName>{serverMyMemberData?.data.name}</ProfileInfoName>
+          <ProfileInfoClass>
+            {`${serverMyMemberData?.data.grade}학년 ${serverMyMemberData?.data.room}반 ${serverMyMemberData?.data.number}번`}
+          </ProfileInfoClass>
         </ProfileInfoTextWrap>
       </ProfileInfoWrap>
       <ProfileTagList />

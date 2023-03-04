@@ -29,7 +29,7 @@ const MainProfileItem = ({ data }: Props) => {
         <MainProfileItemContentTitle>{data.title}</MainProfileItemContentTitle>
         <MainProfileItemContentTagWrap>
           <MainProfileItemContentTagText>
-            #{dataTransform.tagTransform(data.tag)}
+            #{dataTransform.tagTransformToKorean(data.tag)}
           </MainProfileItemContentTagText>
         </MainProfileItemContentTagWrap>
       </MainProfileItemContentWrap>

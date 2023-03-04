@@ -68,15 +68,21 @@ export const usePostSuggestionCommentMutation = () => {
   return mutation;
 };
 
-export const useGetMySuggestionQuery = ({ type }: getMySuggestionsParam) =>
-  useQuery(
-    ["suggestion/getMySuggestions", type],
-    () => SuggestionRepositoryImpl.getMySuggestions({ type }),
+export const useGetMySuggestionQuery = ({
+  type,
+  tag,
+}: getMySuggestionsParam) => {
+  console.log(tag);
+
+  return useQuery(
+    ["suggestion/getMySuggestions", type, tag],
+    () => SuggestionRepositoryImpl.getMySuggestions({ type, tag }),
     {
       staleTime: 1000 * 60 * 5,
       cacheTime: 1000 * 60 * 60,
     }
   );
+};
 
 export const useGetSuggestionsByPage = ({
   page,

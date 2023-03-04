@@ -82,8 +82,11 @@ class SuggestionRepositoryImpl implements SuggestionRepository {
 
   public async getMySuggestions({
     type,
+    tag,
   }: getMySuggestionsParam): Promise<getMySuggestionsResponse> {
-    const { data } = await customAxios.get(`/posting/my?type=${type}`);
+    const { data } = await customAxios.get(
+      `/posting/my?type=${type}&tag=${tag === "전체조회" ? "" : tag || ""}`
+    );
     return data;
   }
 

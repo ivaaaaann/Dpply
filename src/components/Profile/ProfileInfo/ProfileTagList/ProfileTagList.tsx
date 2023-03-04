@@ -1,19 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { WRITE_TAG_ITEMS } from "../../../../constants/write/write.constant";
 import { queryStringParser } from "../../../../utils/queryStringParser";
 import {
   ProfileTagListContainer,
-  ProfileTagLisTextNumber,
   ProfileTagListText,
   ProfileTagListTitle,
   ProfileTagListWrap,
 } from "./style";
-
-const TEST: any[] = [
-  { title: "전체조회", count: 11 },
-  { title: "기숙사", count: 4 },
-  { title: "급식", count: 4 },
-  { title: "교실", count: 3 },
-];
 
 const ProfileTagList = () => {
   const { search } = useLocation();
@@ -27,13 +20,18 @@ const ProfileTagList = () => {
     <ProfileTagListContainer>
       <ProfileTagListTitle>태그 목록</ProfileTagListTitle>
       <ProfileTagListWrap>
-        {TEST.map((item) => (
+        <ProfileTagListText
+          isSelect={currentTag === "전체조회"}
+          onClick={() => navigate(`/profile?tag=전체조회`)}
+        >
+          전체조회
+        </ProfileTagListText>
+        {WRITE_TAG_ITEMS.map((item) => (
           <ProfileTagListText
             isSelect={item.title === currentTag}
             onClick={() => navigate(`/profile?tag=${item.title}`)}
           >
             {item.title}
-            <ProfileTagLisTextNumber>({item.count})</ProfileTagLisTextNumber>
           </ProfileTagListText>
         ))}
       </ProfileTagListWrap>

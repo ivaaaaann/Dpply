@@ -27,7 +27,7 @@ const ProfileListItem = ({ data }: Props) => {
         <ProfileListItemMiddleTitle>{data.title}</ProfileListItemMiddleTitle>
         <ProfileListItemMiddleTagWrap>
           <ProfileListItemTag>
-            #{dataTransform.tagTransform(data.tag)}
+            #{dataTransform.tagTransformToKorean(data.tag)}
           </ProfileListItemTag>
         </ProfileListItemMiddleTagWrap>
       </ProfileListItemMiddleWrap>

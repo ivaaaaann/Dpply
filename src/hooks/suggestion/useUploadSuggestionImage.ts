@@ -5,7 +5,7 @@ import { suggestionPostImageAtom } from "../../store/suggestion/suggestion.store
 
 const useUploadSuggestionImage = () => {
   const [isDrag, setIsDrag] = useState(false);
-  const [image, setImage] = useRecoilState(suggestionPostImageAtom);
+  const [, setImage] = useRecoilState(suggestionPostImageAtom);
   const postUploadMutation = usePostUploadMutation();
 
   const onChangeImage = useCallback(

@@ -32,6 +32,11 @@ export const MainProfileHeaderName = styled.h1`
   line-height: 29px;
   color: black;
   font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const MainProfileHeaderClass = styled.p`

@@ -5,7 +5,7 @@ import { MemberRole } from "../../types/member/member.type";
 
 const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
   const AuthCheck = () => {
-    const { data, isLoading, isError } = useGetMyMemberQuery();
+    const { data, isLoading } = useGetMyMemberQuery();
     const navigate = useNavigate();
     const [isUnauthorized, setIsUnauthorized] = useState(true);
 

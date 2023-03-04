@@ -59,7 +59,10 @@ const ReadHeader = () => {
             <S.ReadHeaderContentLeftTagWrap>
               {serverSuggestionData && (
                 <S.ReadHeaderContentLeftTag>
-                  #{dataTransform.tagTransform(serverSuggestionData?.data.tag)}
+                  #
+                  {dataTransform.tagTransformToKorean(
+                    serverSuggestionData?.data.tag
+                  )}
                 </S.ReadHeaderContentLeftTag>
               )}
             </S.ReadHeaderContentLeftTagWrap>

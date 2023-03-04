@@ -50,7 +50,3 @@ export const ProfileTagListText = styled.p<{ isSelect: boolean }>`
         `}
 `;
 
-export const ProfileTagLisTextNumber = styled.span`
-  color: #909090;
-  font-weight: 400;
-`;

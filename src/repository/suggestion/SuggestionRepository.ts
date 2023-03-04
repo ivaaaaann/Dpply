@@ -5,6 +5,7 @@ import {
   SuggestionStatus,
   SuggestionDetail,
   SuggestionComment,
+  SuggestionTag,
 } from "../../types/suggestion/suggestion.type";
 
 export interface SuggestionRepository {
@@ -36,6 +37,7 @@ export interface SuggestionRepository {
 
   getMySuggestions({
     type,
+    tag,
   }: getMySuggestionsParam): Promise<getMySuggestionsResponse>;
 
   getSuggestionsByPage({
@@ -84,6 +86,7 @@ export interface postSuggestionParam extends Suggestion {}
 
 export interface getMySuggestionsParam {
   type: SuggestionStatus;
+  tag?: SuggestionTag | "전체조회";
 }
 
 export interface getMySuggestionsResponse extends Response {
