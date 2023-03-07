@@ -31,7 +31,6 @@ export const WriteFormInput = styled.input`
 
 export const WriteFormFileWrap = styled.div`
   display: flex;
-  column-gap: 49px;
 `;
 
 export const WriteFormFileInputLabel = styled.label`
@@ -93,6 +92,7 @@ export const WriteFormTextarea = styled.textarea`
   padding: 25px;
   box-sizing: border-box;
   font-size: 20px;
+  margin-left: 49px;
 `;
 
 export const WriteFormSubmitWrap = styled.div`

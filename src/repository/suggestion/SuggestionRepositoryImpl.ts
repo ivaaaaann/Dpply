@@ -1,5 +1,6 @@
 import { customAxios } from "../../lib/axios/axios";
 import {
+  deleteSuggestionParam,
   getMySuggestionsParam,
   getMySuggestionsResponse,
   getSuggestionCommentsParam,
@@ -11,6 +12,8 @@ import {
   getSuggestionsParam,
   getSuggestionsResponse,
   postLikeSuggestionParam,
+  postRefuseSuggestionParam,
+  postSolveSuggestionParam,
   postSuggestionCommentParam,
   postSuggestionParam,
   postUnLikeSuggestionParam,
@@ -48,6 +51,10 @@ class SuggestionRepositoryImpl implements SuggestionRepository {
     });
 
     return data;
+  }
+
+  public async deleteSuggestion({ id }: deleteSuggestionParam): Promise<void> {
+    await customAxios.delete(`/posting/${id}`);
   }
 
   public async postLikeSuggestion({
@@ -93,8 +100,20 @@ class SuggestionRepositoryImpl implements SuggestionRepository {
   public async getSuggestionsByPage({
     page,
   }: getSuggestionsByPageParam): Promise<getSuggestionsByPageResponse> {
-    const { data } = await customAxios.get(`/suggesion?page=${page}`);
+    const { data } = await customAxios.get(`/posting/page?page=${page}`);
     return data;
+  }
+
+  public async postSolveSuggestion({
+    id,
+  }: postSolveSuggestionParam): Promise<void> {
+    await customAxios.post(`/posting/solve/${id}`);
+  }
+
+  public async postRefuseSuggestion({
+    id,
+  }: postRefuseSuggestionParam): Promise<void> {
+    await customAxios.post(`/posting/refuse/${id}`);
   }
 }
 

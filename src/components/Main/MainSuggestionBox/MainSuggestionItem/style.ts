@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ellipsisLine } from "../../../../styles/libStyle";
 
 export const MainSuggestionItemContainer = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ export const MainSuggestionItemContentTitle = styled.h1`
   color: black;
   line-height: 24px;
   margin-top: 1px;
+  ${ellipsisLine(1)}
 `;
 
 export const MainSuggestionItemContentTagWrap = styled.div`
@@ -52,4 +54,5 @@ export const MainSuggestionItemContentTagText = styled.span`
 export const MainSuggestionItemCreatedAt = styled.p`
   font-size: 14px;
   color: #8a8a8a;
+  white-space: nowrap;
 `;

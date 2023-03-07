@@ -60,8 +60,9 @@ export const ReadCommentListItemTextRoot = styled.div<{ isLast: boolean }>`
 `;
 
 export const ReadCommentListItemText = styled.div`
+  max-width: 1200px;
   height: 80px;
-  padding: 0px 40px;
+  padding: 12px 40px;
   font-size: 24px;
   color: black;
   display: flex;
@@ -69,4 +70,6 @@ export const ReadCommentListItemText = styled.div`
   border-radius: 100px;
   border: 1px solid ${palette.main};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  word-break: break-all;
+  line-height: 28px;
 `;

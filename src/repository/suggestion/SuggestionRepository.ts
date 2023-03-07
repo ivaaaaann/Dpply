@@ -31,6 +31,8 @@ export interface SuggestionRepository {
     imageUrl,
   }: postSuggestionParam): Promise<void>;
 
+  deleteSuggestion({ id }: deleteSuggestionParam): Promise<void>;
+
   postLikeSuggestion({ id }: postLikeSuggestionParam): Promise<void>;
 
   postUnLikeSuggestion({ id }: postUnLikeSuggestionParam): Promise<void>;
@@ -43,6 +45,10 @@ export interface SuggestionRepository {
   getSuggestionsByPage({
     page,
   }: getSuggestionsByPageParam): Promise<getSuggestionsByPageResponse>;
+
+  postSolveSuggestion({ id }: postSolveSuggestionParam): Promise<void>;
+
+  postRefuseSuggestion({ id }: postRefuseSuggestionParam): Promise<void>;
 }
 
 export interface getSuggestionsParam {
@@ -84,6 +90,10 @@ export interface postSuggestionCommentParam {
 
 export interface postSuggestionParam extends Suggestion {}
 
+export interface deleteSuggestionParam {
+  id: number;
+}
+
 export interface getMySuggestionsParam {
   type: SuggestionStatus;
   tag?: SuggestionTag | "전체조회";
@@ -95,10 +105,19 @@ export interface getMySuggestionsResponse extends Response {
 
 export interface getSuggestionsByPageParam {
   page: number;
-  limit: number;
 }
 
 export interface getSuggestionsByPageResponse extends Response {
-  isLast: boolean;
-  data: SuggestionPreview[];
+  data: {
+    pageCount: number;
+    posting: SuggestionPreview[];
+  };
+}
+
+export interface postSolveSuggestionParam {
+  id: number;
+}
+
+export interface postRefuseSuggestionParam {
+  id: number;
 }

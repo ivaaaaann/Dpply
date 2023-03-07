@@ -63,7 +63,9 @@ const usePostSuggestion = () => {
         window.alert("건의가 추가되었습니다.");
         navigate("/");
       },
-      onError: () => {},
+      onError: () => {
+        window.alert("에러가 발생하였습니다.");
+      },
     });
   };
 

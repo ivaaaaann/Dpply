@@ -1,18 +1,21 @@
-import { useState } from "react";
 import * as S from "./style";
 import { AiFillLike } from "@react-icons/all-files/ai/AiFillLike";
 import { AiOutlineLike } from "@react-icons/all-files/ai/AiOutlineLike";
 import { GoComment } from "@react-icons/all-files/go/GoComment";
 import dataTransform from "../../../utils/transform/dataTransform";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSuggestionQuery,
   useGetSuggestionCommentsQuery,
 } from "../../../quries/suggestion/suggestion.query";
 import useLikeSuggestion from "../../../hooks/suggestion/useLikeSuggestion";
 import { useGetMyMemberQuery } from "../../../quries/member/member.query";
+import Dropdown from "../../Common/Dropdown/Dropdown";
+import useRemoveSuggestion from "../../../hooks/suggestion/useRemoveSuggestion";
 
 const ReadHeader = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const { data: serverSuggestionData } = useGetSuggestionQuery({
@@ -24,12 +27,10 @@ const ReadHeader = () => {
   const { data: serverMyMemberData } = useGetMyMemberQuery();
 
   const { isLike, likeCount, onToggleIsLike } = useLikeSuggestion({
-    prevIsLike: !!serverSuggestionData?.data.sympathyUser.find(
-      (user) => user.uniqueId === serverMyMemberData?.data.uniqueId
-    ),
     id: Number(id),
-    prevLikeCount: serverSuggestionData?.data.sympathyCount || 0,
   });
+
+  const { onRemove } = useRemoveSuggestion();
 
   return (
     <S.ReadHeaderContainer>
@@ -41,14 +42,36 @@ const ReadHeader = () => {
           <S.ReadHeaderProfileName>
             {serverSuggestionData?.data.user.name}
           </S.ReadHeaderProfileName>
-          <S.ReadHeaderProfileClass>{`${serverSuggestionData?.data.user.grade}학년 ${serverSuggestionData?.data.user.room}반 ${serverSuggestionData?.data.user.number}번`}</S.ReadHeaderProfileClass>
+          <S.ReadHeaderProfileClassTextWrap>
+            <S.ReadHeaderProfileClass>
+              {`${serverSuggestionData?.data.user.grade || 0}학년 ${
+                serverSuggestionData?.data.user.room || 0
+              }반 ${serverSuggestionData?.data.user.number || 0}번`}
+            </S.ReadHeaderProfileClass>
+            {serverMyMemberData?.data.uniqueId ===
+              serverSuggestionData?.data.user.uniqueId && (
+              <Dropdown
+                items={[
+                  {
+                    title: "삭제",
+                    func: () => {
+                      onRemove(Number(id));
+                      navigate("/");
+                    },
+                  },
+                ]}
+              />
+            )}
+          </S.ReadHeaderProfileClassTextWrap>
         </S.ReadHeaderProfileTextWrap>
-        <S.ReadHeaderLikeButton isLike={isLike} onClick={onToggleIsLike}>
-          <S.ReadHeaderLikeButtonIcon>
-            <AiFillLike />
-          </S.ReadHeaderLikeButtonIcon>
-          <S.ReadHeaderLikeButtonText>{likeCount}</S.ReadHeaderLikeButtonText>
-        </S.ReadHeaderLikeButton>
+        {serverMyMemberData && (
+          <S.ReadHeaderLikeButton isLike={isLike} onClick={onToggleIsLike}>
+            <S.ReadHeaderLikeButtonIcon>
+              <AiFillLike />
+            </S.ReadHeaderLikeButtonIcon>
+            <S.ReadHeaderLikeButtonText>{likeCount}</S.ReadHeaderLikeButtonText>
+          </S.ReadHeaderLikeButton>
+        )}
       </S.ReadHeaderProfileWrap>
       <S.ReadHeaderContentWrap>
         <S.ReadHeaderContentLeftWrap>

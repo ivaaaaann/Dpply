@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import useRemoveSuggestion from "../../../hooks/suggestion/useRemoveSuggestion";
 import { SuggestionPreview } from "../../../types/suggestion/suggestion.type";
 import dataTransform from "../../../utils/transform/dataTransform";
 import {
@@ -8,7 +10,6 @@ import {
   ProfileListItemMiddleTitle,
   ProfileListItemMiddleWrap,
   ProfileListItemRightButton,
-  ProfileListItemRightButtonWrap,
   ProfileListItemRightCreatedAt,
   ProfileListItemRightWrap,
   ProfileListItemTag,
@@ -19,8 +20,11 @@ interface Props {
 }
 
 const ProfileListItem = ({ data }: Props) => {
+  const navigate = useNavigate();
+  const { onRemove } = useRemoveSuggestion();
+
   return (
-    <ProfileListItemContainer>
+    <ProfileListItemContainer onClick={() => navigate(`/read/${data.id}`)}>
       <ProfileListItemImg src={data.imageUrl} />
       <ProfileListItemMiddleWrap>
         <ProfileListItemMiddleName>{data.user.name}</ProfileListItemMiddleName>
@@ -32,11 +36,9 @@ const ProfileListItem = ({ data }: Props) => {
         </ProfileListItemMiddleTagWrap>
       </ProfileListItemMiddleWrap>
       <ProfileListItemRightWrap>
-        <ProfileListItemRightButtonWrap>
-          <ProfileListItemRightButton>수정</ProfileListItemRightButton>
-          <div>|</div>
-          <ProfileListItemRightButton>삭제</ProfileListItemRightButton>
-        </ProfileListItemRightButtonWrap>
+        <ProfileListItemRightButton onClick={() => onRemove(data.id)}>
+          삭제
+        </ProfileListItemRightButton>
         <ProfileListItemRightCreatedAt>
           {data.createAt}
         </ProfileListItemRightCreatedAt>

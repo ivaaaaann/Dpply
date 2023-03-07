@@ -5,6 +5,7 @@ export const ProfileListItemContainer = styled.div`
   min-height: 59px;
   display: flex;
   column-gap: 19px;
+  cursor: pointer;
 `;
 
 export const ProfileListItemImg = styled.img`
@@ -57,13 +58,6 @@ export const ProfileListItemRightWrap = styled.div`
   flex-direction: column;
 `;
 
-export const ProfileListItemRightButtonWrap = styled.div`
-  display: flex;
-  align-items: center;
-  color: #8a8a8a;
-  column-gap: 6px;
-`;
-
 export const ProfileListItemRightButton = styled.button`
   font-size: 12px;
   height: 14px;
@@ -74,6 +68,7 @@ export const ProfileListItemRightButton = styled.button`
   white-space: nowrap;
   padding: 0px;
   color: #8a8a8a;
+  text-align: end;
 
   &:hover {
     text-decoration: underline;
@@ -84,4 +79,5 @@ export const ProfileListItemRightCreatedAt = styled.span`
   font-size: 12px;
   color: #8a8a8a;
   margin-top: auto;
+  white-space: nowrap;
 `;

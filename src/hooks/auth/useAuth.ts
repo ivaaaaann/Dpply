@@ -31,6 +31,7 @@ const useAuth = () => {
         onError: () => {
           window.alert("인증 실패");
           navigate("/auth");
+          token.clearToken();
         },
       }
     );

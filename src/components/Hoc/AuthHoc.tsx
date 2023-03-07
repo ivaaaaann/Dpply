@@ -9,22 +9,29 @@ const AuthHoc = (AuthComponent: ComponentType, role: MemberRole) => {
     const navigate = useNavigate();
     const [isUnauthorized, setIsUnauthorized] = useState(true);
 
+    const authExceptionHandle = () => {
+      window.alert("불가능한 접근입니다.");
+      setIsUnauthorized(true);
+      navigate("/");
+    };
+
     useEffect(() => {
-      if (!isLoading && !data) {
-        window.alert("불가능한 접근입니다.");
-        setIsUnauthorized(true);
-        navigate("/");
-      } else if (data) {
-        const { role: memberRole } = data.data;
-        if (memberRole === "STUDENT" && role === "ADMIN") {
-          window.alert("불가능한 접근입니다.");
-          setIsUnauthorized(true);
-          navigate("/");
-        } else {
-          setIsUnauthorized(false);
-        }
+      if (!isLoading && data === undefined) {
+        authExceptionHandle();
+        return;
       }
-    }, [data, navigate, isLoading]);
+
+      if (data) {
+        const { role: memberRole } = data.data;
+
+        if (memberRole === "STUDENT" && role === "ADMIN") {
+          authExceptionHandle();
+          return;
+        }
+
+        setIsUnauthorized(false);
+      }
+    }, [data, isLoading]);
 
     return <>{isUnauthorized ? <>loading...</> : <AuthComponent />}</>;
   };

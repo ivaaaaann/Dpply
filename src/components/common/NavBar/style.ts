@@ -14,11 +14,13 @@ export const NavBarContainer = styled.div`
 export const NavBarLogoWrap = styled.div`
   display: flex;
   align-items: flex-end;
+  margin-right: auto;
 `;
 
 export const NavBarLogo = styled.img`
   width: 140px;
   object-fit: scale-down;
+  cursor: pointer;
 `;
 
 export const NavBarAdminText = styled.p`

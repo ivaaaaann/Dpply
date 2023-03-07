@@ -9,6 +9,9 @@ import {
   postSuggestionCommentParam,
   postSuggestionParam,
   postUnLikeSuggestionParam,
+  deleteSuggestionParam,
+  postSolveSuggestionParam,
+  postRefuseSuggestionParam,
 } from "../../repository/suggestion/SuggestionRepository";
 
 import SuggestionRepositoryImpl from "../../repository/suggestion/SuggestionRepositoryImpl";
@@ -68,13 +71,8 @@ export const usePostSuggestionCommentMutation = () => {
   return mutation;
 };
 
-export const useGetMySuggestionQuery = ({
-  type,
-  tag,
-}: getMySuggestionsParam) => {
-  console.log(tag);
-
-  return useQuery(
+export const useGetMySuggestionQuery = ({ type, tag }: getMySuggestionsParam) =>
+  useQuery(
     ["suggestion/getMySuggestions", type, tag],
     () => SuggestionRepositoryImpl.getMySuggestions({ type, tag }),
     {
@@ -82,22 +80,42 @@ export const useGetMySuggestionQuery = ({
       cacheTime: 1000 * 60 * 60,
     }
   );
-};
 
-export const useGetSuggestionsByPage = ({
-  page,
-  limit,
-}: getSuggestionsByPageParam) =>
+export const useGetSuggestionsByPage = ({ page }: getSuggestionsByPageParam) =>
   useQuery(
-    "suggestion/getSuggestionByPage",
-    () => SuggestionRepositoryImpl.getSuggestionsByPage({ page, limit }),
-    { keepPreviousData: true, enabled: !!page }
+    ["suggestion/getSuggestionByPage", page],
+    () => SuggestionRepositoryImpl.getSuggestionsByPage({ page }),
+    { keepPreviousData: true }
   );
 
 export const usePostSuggestionMutation = () => {
   const mutation = useMutation(
     ({ title, text, tag, imageUrl }: postSuggestionParam) =>
       SuggestionRepositoryImpl.postSuggestion({ title, text, tag, imageUrl })
+  );
+
+  return mutation;
+};
+
+export const useDeleteSuggestionMutation = () => {
+  const mutation = useMutation(({ id }: deleteSuggestionParam) =>
+    SuggestionRepositoryImpl.deleteSuggestion({ id })
+  );
+
+  return mutation;
+};
+
+export const usePostSolveSuggestionMutation = () => {
+  const mutation = useMutation(({ id }: postSolveSuggestionParam) =>
+    SuggestionRepositoryImpl.postSolveSuggestion({ id })
+  );
+
+  return mutation;
+};
+
+export const usePostRefuseSuggestionMutation = () => {
+  const mutation = useMutation(({ id }: postRefuseSuggestionParam) =>
+    SuggestionRepositoryImpl.postRefuseSuggestion({ id })
   );
 
   return mutation;

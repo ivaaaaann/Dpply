@@ -24,10 +24,10 @@ const NavBar = () => {
   return (
     <NavBarContainer>
       <NavBarLogoWrap>
-        <NavBarLogo src={NavLogo} />
+        <NavBarLogo src={NavLogo} onClick={() => navigate("/")} />
         {isAdmin && <NavBarAdminText>Admin</NavBarAdminText>}
       </NavBarLogoWrap>
-      <NavBarSearch />
+      {/* <NavBarSearch /> */}
       {isLogin ? (
         <NavBarWriteButton>
           <NavBarWriteButtonIcon>

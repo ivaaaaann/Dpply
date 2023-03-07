@@ -12,7 +12,7 @@ export const AdminMainWrap = styled.div`
   width: 1520px;
   display: flex;
   flex-direction: column;
-  padding-top: 56px;
+  padding: 56px 0px;
 `;
 
 export const AdminMainTitleWrap = styled.div`

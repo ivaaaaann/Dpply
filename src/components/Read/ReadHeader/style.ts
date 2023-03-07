@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { ellipsisLine } from "../../../styles/libStyle";
 import { palette } from "../../../styles/palette";
 
 export const ReadHeaderContainer = styled.div`
@@ -34,6 +35,11 @@ export const ReadHeaderProfileName = styled.h1`
   font-weight: 600;
 `;
 
+export const ReadHeaderProfileClassTextWrap = styled.div`
+  display: flex;
+  column-gap: 10px;
+`;
+
 export const ReadHeaderProfileClass = styled.p`
   color: #909090;
   font-size: 24px;
@@ -51,7 +57,6 @@ export const ReadHeaderLikeButton = styled.button<{ isLike: boolean }>`
   column-gap: 3px;
   box-sizing: border-box;
   border: 1px solid #c9c9c9;
-  margin-top: auto;
   cursor: pointer;
 
   ${({ isLike }) =>
@@ -97,8 +102,10 @@ export const ReadHeaderContentLeftTitleWrap = styled.div`
 `;
 
 export const ReadHeaderContentLeftTitle = styled.h1`
+  max-width: 80%;
   font-size: 40px;
   color: black;
+  ${ellipsisLine(1)}
   font-weight: 600;
 `;
 
@@ -120,7 +127,7 @@ export const ReadHeaderContentLeftContent = styled.pre`
   color: black;
   margin-top: 35px;
   white-space: pre-wrap;
-  word-break: keep-all;
+  word-break: break-all;
   line-height: 29px;
 `;
 

@@ -23,9 +23,6 @@ const customAxiosRequestHandler = (config: AxiosRequestConfig) => {
     config.headers = {
       [REQUEST_TOKEN_KEY]: `Bearer ${token.getToken(ACCESS_TOKEN_KEY)}`,
     };
-  } else {
-    window.alert("토큰이 존재하지 않습니다.");
-    window.location.href = "http://localhost:3000/auth";
   }
 
   return config;

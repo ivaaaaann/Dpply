@@ -1,25 +1,30 @@
+import { useRecoilState } from "recoil";
 import { usePagenationSuggestion } from "../../../hooks/suggestion/usePagenationSuggestion";
-import { AdminMainListPagenationContainer } from "./style";
+import {
+  adminPageAtom,
+  adminPageHasMoreAtom,
+} from "../../../store/admin/admin.store";
+import * as S from "./style";
+import { BsFillTriangleFill } from "@react-icons/all-files/bs/BsFillTriangleFill";
 
 const AdminMainListPagenation = () => {
-  //   console.log(
-  //     Array(10)
-  //       .fill(0)
-  //       .map((_, i) => {
-  //         const id = page * 10 + (i + 1);
-  //         return {
-  //           name: "Project " + id,
-  //           id,
-  //         };
-  //       })
-  //   );
+  const [, setHasMore] = useRecoilState(adminPageHasMoreAtom);
+  const [page, setPage] = useRecoilState(adminPageAtom);
 
-  const { increasePage } = usePagenationSuggestion();
+  const { totalPage, increasePage, decreasePage } = usePagenationSuggestion();
 
   return (
-    <AdminMainListPagenationContainer>
-      <button onClick={increasePage}></button>
-    </AdminMainListPagenationContainer>
+    <S.AdminMainListPagenationContainer>
+      <S.SideButton direction="left" onClick={decreasePage}>
+        <BsFillTriangleFill />
+      </S.SideButton>
+      <S.PageNumberWrap>
+        <S.PageNumber>{page}</S.PageNumber>
+      </S.PageNumberWrap>
+      <S.SideButton direction="right" onClick={increasePage}>
+        <BsFillTriangleFill />
+      </S.SideButton>
+    </S.AdminMainListPagenationContainer>
   );
 };
 

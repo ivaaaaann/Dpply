@@ -27,6 +27,12 @@ export const MainProfileHeaderInfoWrap = styled.div`
   row-gap: 8px;
 `;
 
+export const MainProfileHeaderNameWrap = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+`;
+
 export const MainProfileHeaderName = styled.h1`
   font-size: 24px;
   line-height: 29px;
@@ -37,6 +43,15 @@ export const MainProfileHeaderName = styled.h1`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const MainProfileLogoutButton = styled.button`
+  width: 60px;
+  height: 24px;
+  padding: 0px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
 `;
 
 export const MainProfileHeaderClass = styled.p`
@@ -50,4 +65,13 @@ export const MainProfileHeaderNotLogin = styled.p`
   font-size: 24px;
   font-weight: 600;
   color: #8a8a8a;
+`;
+
+export const MainProfileHeaderLoginButton = styled.button`
+  width: 60px;
+  height: 24px;
+  padding: 0px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ellipsisLine } from "../../../../styles/libStyle";
 
 export const MainProfileItemContainer = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ export const MainProfileItemContentTitle = styled.h1`
   font-size: 14px;
   line-height: 17px;
   margin-top: 2px;
+  ${ellipsisLine(1)}
 `;
 
 export const MainProfileItemContentTagWrap = styled.div`
@@ -53,4 +55,5 @@ export const MainProfileItemContentCreatedAt = styled.span`
   font-size: 12px;
   color: #8a8a8a;
   margin-top: auto;
+  white-space: nowrap;
 `;

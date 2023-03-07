@@ -12,7 +12,7 @@ export interface SuggestionDetail extends Suggestion {
   createAt: string;
   updateAt: string;
   sympathyCount: number;
-  sympathyUser: Member[];
+  sympathyUser: SuggestionSympathy[];
   status: SuggestionStatus;
   user: Member;
 }
@@ -22,6 +22,12 @@ export interface SuggestionComment {
   createAt: string;
   id: number;
   positing: SuggestionDetail;
+  user: Member;
+}
+
+export interface SuggestionSympathy {
+  id: number;
+  status: "YES" | "NO";
   user: Member;
 }
 
