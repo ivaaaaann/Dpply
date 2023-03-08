@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
 `;
 
 export const MainBannerWrap = styled.div`
-  width: 1520px;
+  width: 100%;
   min-height: 320px;
   padding: 0px 51px;
   box-sizing: border-box;
