@@ -31,7 +31,9 @@ const AdminListItem = ({ data }: Props) => {
         {data.title}
       </S.AdminListItemTd>
       <S.AdminListItemTd>{data.user.name}</S.AdminListItemTd>
-      <S.AdminListItemTd>{`${data.user.grade}${data.user.room}${data.user.number}`}</S.AdminListItemTd>
+      <S.AdminListItemTd>{`${data.user.grade}${data.user.room}${String(
+        data.user.number
+      ).padStart(2, "0")}`}</S.AdminListItemTd>
       <S.AdminListItemTd style={{ whiteSpace: "nowrap" }}>
         {data.createAt}
       </S.AdminListItemTd>
