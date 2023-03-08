@@ -10,6 +10,7 @@ export const ProfileListItemContainer = styled.div`
 
 export const ProfileListItemImg = styled.img`
   min-width: 59px;
+  max-width: 59px;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;

@@ -4,12 +4,14 @@ import { HiCheck } from "@react-icons/all-files/hi/HiCheck";
 import { CgClose } from "@react-icons/all-files/cg/CgClose";
 import useSolveSuggestion from "../../../hooks/suggestion/useSolveSuggestion";
 import useRefuseSuggestion from "../../../hooks/suggestion/useRefuseSuggestion";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: SuggestionPreview;
 }
 
 const AdminListItem = ({ data }: Props) => {
+  const navigate = useNavigate();
   const { solve } = useSolveSuggestion();
   const { refuse } = useRefuseSuggestion();
 
@@ -22,7 +24,9 @@ const AdminListItem = ({ data }: Props) => {
           textAlign: "start",
           overflow: "hidden",
           boxSizing: "border-box",
+          cursor: "pointer",
         }}
+        onClick={() => navigate(`/read/${data.id}`)}
       >
         {data.title}
       </S.AdminListItemTd>

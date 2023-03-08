@@ -12,6 +12,7 @@ export const MainProfileItemContainer = styled.div`
 
 export const MainProfileItemImg = styled.img`
   min-width: 59px;
+  max-width: 59px;
   height: 59px;
   background-color: #d9d9d9;
   border-radius: 5px;

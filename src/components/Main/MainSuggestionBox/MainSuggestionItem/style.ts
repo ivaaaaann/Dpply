@@ -13,6 +13,7 @@ export const MainSuggestionItemContainer = styled.div`
 
 export const MainSuggestionItemImg = styled.img`
   min-width: 80px;
+  max-width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 5px;

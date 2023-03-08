@@ -21,7 +21,7 @@ const MainSuggestionItem = ({ data }: Props) => {
 
   return (
     <MainSuggestionItemContainer onClick={() => navigate(`/read/${data.id}`)}>
-      <MainSuggestionItemImg />
+      <MainSuggestionItemImg src={data.imageUrl} />
       <MainSuggestionItemContentWrap>
         <MainSuggestionItemContentName>익명</MainSuggestionItemContentName>
         <MainSuggestionItemContentTitle>
