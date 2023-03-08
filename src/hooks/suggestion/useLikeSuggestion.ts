@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { useGetMyMemberQuery } from "../../quries/member/member.query";
+import { useQueryClient } from "react-query";
 import {
-  useGetSuggestionQuery,
   usePostLikeSuggestionMutation,
   usePostUnLikeSuggestionMutation,
 } from "../../quries/suggestion/suggestion.query";
@@ -11,36 +9,12 @@ interface Props {
 }
 
 const useLikeSuggestion = ({ id }: Props) => {
-  const [isLike, setIsLike] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-
-  const { data: serverMyMemberData } = useGetMyMemberQuery();
-  const { data: serverSuggestionData } = useGetSuggestionQuery({ id });
+  const queryClient = useQueryClient();
 
   const postLikeSuggestionMutation = usePostLikeSuggestionMutation();
   const postUnLikeSuggestionMutation = usePostUnLikeSuggestionMutation();
 
-  // useEffect(() => {
-  //   console.log(isLike);
-  // }, [isLike]);
-
-  useEffect(() => {
-    if (serverMyMemberData && serverSuggestionData) {
-      setIsLike(
-        serverSuggestionData.data.sympathyUser.find(
-          (user) => user.user.uniqueId === serverMyMemberData.data.uniqueId
-        )?.status === "YES"
-      );
-    }
-  }, [serverMyMemberData, serverSuggestionData]);
-
-  useEffect(() => {
-    if (serverSuggestionData) {
-      setLikeCount(serverSuggestionData.data.sympathyCount);
-    }
-  }, [serverSuggestionData]);
-
-  const onToggleIsLike = () => {
+  const onToggleIsLike = (isLike: boolean) => {
     if (
       postLikeSuggestionMutation.isLoading ||
       postUnLikeSuggestionMutation.isLoading
@@ -60,8 +34,7 @@ const useLikeSuggestion = ({ id }: Props) => {
       { id },
       {
         onSuccess: () => {
-          setIsLike(true);
-          setLikeCount((prev) => prev + 1);
+          queryClient.invalidateQueries(["suggestion/getSuggestion", id]);
         },
       }
     );
@@ -72,16 +45,13 @@ const useLikeSuggestion = ({ id }: Props) => {
       { id },
       {
         onSuccess: () => {
-          setIsLike(false);
-          setLikeCount((prev) => prev - 1);
+          queryClient.invalidateQueries(["suggestion/getSuggestion", id]);
         },
       }
     );
   };
 
   return {
-    isLike,
-    likeCount,
     onToggleIsLike,
   };
 };

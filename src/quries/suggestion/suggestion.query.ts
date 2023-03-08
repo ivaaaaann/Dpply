@@ -38,7 +38,7 @@ export const useGetSuggestionCommentsQuery = ({
   id,
 }: getSuggestionCommentsParam) =>
   useQuery(
-    "suggestion/getSuggestionComments",
+    ["suggestion/getSuggestionComments", id],
     () => SuggestionRepositoryImpl.getSuggestionComments({ id }),
     {
       staleTime: 1000 * 60 * 5,

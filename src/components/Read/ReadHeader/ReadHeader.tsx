@@ -12,6 +12,7 @@ import useLikeSuggestion from "../../../hooks/suggestion/useLikeSuggestion";
 import { useGetMyMemberQuery } from "../../../quries/member/member.query";
 import Dropdown from "../../Common/Dropdown/Dropdown";
 import useRemoveSuggestion from "../../../hooks/suggestion/useRemoveSuggestion";
+import { useMemo } from "react";
 
 const ReadHeader = () => {
   const navigate = useNavigate();
@@ -26,7 +27,19 @@ const ReadHeader = () => {
   });
   const { data: serverMyMemberData } = useGetMyMemberQuery();
 
-  const { isLike, likeCount, onToggleIsLike } = useLikeSuggestion({
+  const isLike = useMemo(() => {
+    if (serverMyMemberData && serverSuggestionData) {
+      return (
+        serverSuggestionData.data.sympathyUser.find(
+          (user) => user.user.uniqueId === serverMyMemberData.data.uniqueId
+        )?.status === "YES"
+      );
+    }
+
+    return false;
+  }, [serverMyMemberData, serverSuggestionData]);
+
+  const { onToggleIsLike } = useLikeSuggestion({
     id: Number(id),
   });
 
@@ -65,11 +78,16 @@ const ReadHeader = () => {
           </S.ReadHeaderProfileClassTextWrap>
         </S.ReadHeaderProfileTextWrap>
         {serverMyMemberData && (
-          <S.ReadHeaderLikeButton isLike={isLike} onClick={onToggleIsLike}>
+          <S.ReadHeaderLikeButton
+            isLike={isLike}
+            onClick={() => onToggleIsLike(isLike)}
+          >
             <S.ReadHeaderLikeButtonIcon>
               <AiFillLike />
             </S.ReadHeaderLikeButtonIcon>
-            <S.ReadHeaderLikeButtonText>{likeCount}</S.ReadHeaderLikeButtonText>
+            <S.ReadHeaderLikeButtonText>
+              {serverSuggestionData?.data.sympathyCount}
+            </S.ReadHeaderLikeButtonText>
           </S.ReadHeaderLikeButton>
         )}
       </S.ReadHeaderProfileWrap>
@@ -103,7 +121,7 @@ const ReadHeader = () => {
                   <AiOutlineLike />
                 </S.ReadHeaderContentLeftBottomInfoItemIcon>
                 <S.ReadHeaderContentLeftBottomInfoItemText>
-                  {likeCount}
+                  {serverSuggestionData?.data.sympathyCount}
                 </S.ReadHeaderContentLeftBottomInfoItemText>
                 <S.ReadHeaderContentLeftBottomInfoItemIcon>
                   <GoComment />

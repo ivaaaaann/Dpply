@@ -27,7 +27,10 @@ const usePostComment = ({ id }: Props) => {
       {
         onSuccess: () => {
           window.alert("댓글이 게시되었습니다.");
-          queryClient.invalidateQueries("suggestion/getSuggestionComments");
+          queryClient.invalidateQueries([
+            "suggestion/getSuggestionComments",
+            id,
+          ]);
           setComment("");
         },
         onError: () => {
