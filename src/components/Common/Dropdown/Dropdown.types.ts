@@ -1,8 +1,8 @@
 export interface DropdownProps {
-    items : DropdownItem[]
+  items: DropdownItem[];
 }
 
-export interface DropdownItem  {
-    title : string ;
-    func : () => void;
+export interface DropdownItem {
+  title: string;
+  func: () => void;
 }

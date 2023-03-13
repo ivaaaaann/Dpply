@@ -5,17 +5,11 @@ import {
   AdminMainListThead,
   AdminMainListTr,
 } from "./style";
-import { useGetSuggestionsByPage } from "../../../quries/suggestion/suggestion.query";
 import AdminListItem from "../AdminListItem/AdminListItem";
-import { useRecoilState } from "recoil";
-import { adminPageAtom } from "../../../store/admin/admin.store";
+import useFilterSuggestion from "../../../hooks/suggestion/useFilterSuggestion";
 
 const AdminMainList = () => {
-  const [page, setPage] = useRecoilState(adminPageAtom);
-
-  const { data: serverSuggestionsData } = useGetSuggestionsByPage({
-    page: page,
-  });
+  const { suggestion } = useFilterSuggestion();
 
   return (
     <AdminMainListContainer>
@@ -32,7 +26,7 @@ const AdminMainList = () => {
         </AdminMainListTr>
       </AdminMainListThead>
       <AdminMainListTbody>
-        {serverSuggestionsData?.data.posting.map((item) => (
+        {suggestion?.map((item) => (
           <AdminListItem data={item} key={item.id} />
         ))}
       </AdminMainListTbody>
