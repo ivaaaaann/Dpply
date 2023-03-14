@@ -37,3 +37,16 @@ export const AdminMainTitle = styled.h1`
   font-size: 32px;
   font-weight: 600;
 `;
+
+export const SelectTagWrap = styled.div`
+  width: 100px;
+  height: 30px;
+
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const SeletTagText = styled.span``;

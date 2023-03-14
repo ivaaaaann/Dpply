@@ -39,3 +39,7 @@ export type SuggestionPreview = Omit<
   SuggestionDetail,
   "text" | "updateAt" | "sympathyCount" | "sympathyList" | "status"
 >;
+
+export interface SuggestionAll {
+  data: SuggestionDetail;
+}
