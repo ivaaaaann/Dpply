@@ -9,10 +9,11 @@ export const AdminMainContainer = styled.div`
 `;
 
 export const AdminMainWrap = styled.div`
-  width: 1520px;
+  width: 1000%;
   display: flex;
   flex-direction: column;
-  padding: 56px 0px;
+  padding: 56px 51px;
+  box-sizing: border-box;
 `;
 
 export const AdminMainTitleWrap = styled.div`

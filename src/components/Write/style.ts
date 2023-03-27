@@ -10,8 +10,10 @@ export const WriteContainer = styled.div`
 `;
 
 export const WriteWrap = styled.div`
-  width: 1520px;
+  width: 100%;
   height: 100%;
+  padding: 0px 51px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin-top: 58px;

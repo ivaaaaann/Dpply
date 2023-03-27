@@ -85,7 +85,7 @@ export const ReadHeaderLikeButtonText = styled.p`
 export const ReadHeaderContentWrap = styled.div`
   width: 100%;
   display: flex;
-  column-gap: 39px;
+  justify-content: space-between;
   margin-top: 50px;
 `;
 

@@ -11,7 +11,9 @@ export const ProfileContainer = styled.div`
 `;
 
 export const ProfileWrap = styled.div`
-  width: 1520px;
+  width: 100%;
+  padding: 0px 51px;
+  box-sizing: border-box;
   height: 770px;
   display: flex;
   justify-content: space-between;
