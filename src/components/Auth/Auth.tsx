@@ -20,11 +20,9 @@ const Auth = () => {
           <AuthPaperWrap>
             <AuthTitle>LOGIN</AuthTitle>
             <AuthButton
-              onClick={() =>
-                window.open(
-                  `http://dauth.b1nd.com/login?client_id=${config.CLIENT_ID}&redirect_uri=${config.REDIRECT_URL}`
-                )
-              }
+              onClick={() => {
+                window.location.href = `http://dauth.b1nd.com/login?client_id=${config.CLIENT_ID}&redirect_uri=${config.REDIRECT_URL}`;
+              }}
             >
               도담도담으로 로그인
             </AuthButton>

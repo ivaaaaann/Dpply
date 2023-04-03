@@ -28,19 +28,7 @@ const ReadHeader = () => {
   });
   const { data: serverMyMemberData } = useGetMyMemberQuery();
 
-  const isLike = useMemo(() => {
-    if (serverMyMemberData && serverSuggestionData) {
-      return (
-        serverSuggestionData.data.sympathyUser.find(
-          (user) => user.user.uniqueId === serverMyMemberData.data.uniqueId
-        )?.status === "YES"
-      );
-    }
-
-    return false;
-  }, [serverMyMemberData, serverSuggestionData]);
-
-  const { onToggleIsLike } = useLikeSuggestion({
+  const { onToggleIsLike, isLike, likeCount } = useLikeSuggestion({
     id: Number(id),
   });
 
@@ -81,14 +69,12 @@ const ReadHeader = () => {
         {serverMyMemberData && (
           <S.ReadHeaderLikeButton
             isLike={isLike}
-            onClick={() => onToggleIsLike(isLike)}
+            onClick={() => onToggleIsLike()}
           >
             <S.ReadHeaderLikeButtonIcon>
               <AiFillLike />
             </S.ReadHeaderLikeButtonIcon>
-            <S.ReadHeaderLikeButtonText>
-              {serverSuggestionData?.data.sympathyCount}
-            </S.ReadHeaderLikeButtonText>
+            <S.ReadHeaderLikeButtonText>{likeCount}</S.ReadHeaderLikeButtonText>
           </S.ReadHeaderLikeButton>
         )}
       </S.ReadHeaderProfileWrap>
