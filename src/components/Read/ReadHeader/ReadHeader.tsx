@@ -13,6 +13,7 @@ import { useGetMyMemberQuery } from "../../../quries/member/member.query";
 import Dropdown from "../../Common/Dropdown/Dropdown";
 import useRemoveSuggestion from "../../../hooks/suggestion/useRemoveSuggestion";
 import { useMemo } from "react";
+import DefaultProfile from "../../../assets/image/common/defaultProfile.png";
 
 const ReadHeader = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const ReadHeader = () => {
     <S.ReadHeaderContainer>
       <S.ReadHeaderProfileWrap>
         <S.ReadHeaderProfileImg
-          src={serverSuggestionData?.data.user.profileImage}
+          src={serverSuggestionData?.data.user.profileImage || DefaultProfile}
         />
         <S.ReadHeaderProfileTextWrap>
           <S.ReadHeaderProfileName>

@@ -16,7 +16,7 @@ const AdminMainList = () => {
       <AdminMainListThead>
         <AdminMainListTr>
           <AdminMainListTh>번호</AdminMainListTh>
-          <AdminMainListTh style={{ minWidth: 832, maxWidth: 832 }}>
+          <AdminMainListTh style={{ minWidth: 500, maxWidth: 500 }}>
             제목
           </AdminMainListTh>
           <AdminMainListTh>작성자</AdminMainListTh>

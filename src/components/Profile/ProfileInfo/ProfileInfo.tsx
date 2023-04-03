@@ -8,6 +8,7 @@ import {
   ProfileInfoTextWrap,
   ProfileInfoWrap,
 } from "./style";
+import DefaultProfile from "../../../assets/image/common/defaultProfile.png";
 
 const ProfileInfo = () => {
   const { data: serverMyMemberData } = useGetMyMemberQuery();
@@ -15,7 +16,9 @@ const ProfileInfo = () => {
   return (
     <ProfileInfoContainer>
       <ProfileInfoWrap>
-        <ProfileInfoImg src={serverMyMemberData?.data.profileImage} />
+        <ProfileInfoImg
+          src={serverMyMemberData?.data.profileImage || DefaultProfile}
+        />
         <ProfileInfoTextWrap>
           <ProfileInfoName>{serverMyMemberData?.data.name}</ProfileInfoName>
           <ProfileInfoClass>

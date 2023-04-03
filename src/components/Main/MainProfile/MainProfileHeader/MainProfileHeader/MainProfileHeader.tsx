@@ -12,6 +12,7 @@ import {
   MainProfileHeaderNotLogin,
   MainProfileLogoutButton,
 } from "./style";
+import DefaultProfile from "../../../../../assets/image/common/defaultProfile.png";
 
 const MainProfileHeader = () => {
   const { data, isLogin } = useAuthCheck();
@@ -20,7 +21,7 @@ const MainProfileHeader = () => {
 
   return (
     <MainProfileHeaderContainer>
-      <MainProfileHeaderImg />
+      <MainProfileHeaderImg src={data?.data.profileImage || DefaultProfile} />
       <MainProfileHeaderInfoWrap>
         {isLogin ? (
           <>

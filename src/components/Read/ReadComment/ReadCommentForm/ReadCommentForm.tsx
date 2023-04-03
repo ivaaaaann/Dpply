@@ -9,6 +9,7 @@ import {
   ReadCommentFormInputWrap,
   ReadCommentFormProfileImg,
 } from "./style";
+import DefaultProfile from "../../../../assets/image/common/defaultProfile.png";
 
 const ReadCommentForm = () => {
   const { id } = useParams();
@@ -21,7 +22,9 @@ const ReadCommentForm = () => {
 
   return (
     <ReadCommentFormContainer>
-      <ReadCommentFormProfileImg src={serverMyMemberData?.data.profileImage} />
+      <ReadCommentFormProfileImg
+        src={serverMyMemberData?.data.profileImage || DefaultProfile}
+      />
       <ReadCommentFormInputWrap onSubmit={onSubmitComment}>
         <ReadCommentFormInput
           placeholder="댓글을 입력하세요"

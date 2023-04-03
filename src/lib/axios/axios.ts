@@ -32,7 +32,7 @@ const customAxiosErrorHandler = async (config: AxiosError) => {
   const accessToken = token.getToken(ACCESS_TOKEN_KEY);
   const refreshToken = token.getToken(REFRESH_TOKEN_KEY);
 
-  if (accessToken && refreshToken && config.response?.status === 410) {
+  if (accessToken && refreshToken && config.response?.status === 401) {
     try {
       const { data } = await authRepository.postAuthRefresh({ refreshToken });
 
@@ -44,6 +44,8 @@ const customAxiosErrorHandler = async (config: AxiosError) => {
       window.location.href = "http://localhost:3000/auth";
     }
   }
+
+  return axios(config.config);
 };
 
 customAxios.interceptors.request.use(customAxiosRequestHandler);

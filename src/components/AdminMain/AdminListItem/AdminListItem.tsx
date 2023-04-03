@@ -20,7 +20,6 @@ const AdminListItem = ({ data }: Props) => {
       <S.AdminListItemTd>{data.id}</S.AdminListItemTd>
       <S.AdminListItemTd
         style={{
-          maxWidth: 832,
           textAlign: "start",
           overflow: "hidden",
           boxSizing: "border-box",

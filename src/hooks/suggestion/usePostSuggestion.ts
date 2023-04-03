@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { usePostSuggestionMutation } from "../../quries/suggestion/suggestion.query";
@@ -9,6 +10,8 @@ import {
 } from "../../types/suggestion/suggestion.type";
 
 const usePostSuggestion = () => {
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
 
   const [postData, setPostData] = useState<Suggestion>({
@@ -61,6 +64,7 @@ const usePostSuggestion = () => {
     postSuggestionMutation.mutate(postData, {
       onSuccess: () => {
         window.alert("건의가 추가되었습니다.");
+        queryClient.invalidateQueries(["suggestion/getSuggestions", "WAITING"]);
         navigate("/");
       },
       onError: () => {

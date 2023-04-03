@@ -8,6 +8,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 export const ProfileWrap = styled.div`
@@ -16,5 +17,6 @@ export const ProfileWrap = styled.div`
   box-sizing: border-box;
   height: 770px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 76px;
 `;

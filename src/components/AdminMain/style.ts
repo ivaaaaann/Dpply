@@ -9,7 +9,7 @@ export const AdminMainContainer = styled.div`
 `;
 
 export const AdminMainWrap = styled.div`
-  width: 1000%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 56px 51px;

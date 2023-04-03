@@ -11,6 +11,7 @@ import {
   ReadCommentListItemText,
 } from "./style";
 import Timecounting from "time-counting";
+import DefaultProfile from "../../../../../assets/image/common/defaultProfile.png";
 
 interface Props {
   comment: SuggestionComment;
@@ -21,7 +22,9 @@ const ReadCommentListItem = ({ comment, isLast }: Props) => {
   return (
     <ReadCommentListItemContainer>
       <ReadCommentListItemProfileWrap>
-        <ReadCommentListItemProfileImg src={comment.user.profileImage} />
+        <ReadCommentListItemProfileImg
+          src={comment.user.profileImage || DefaultProfile}
+        />
         <ReadCommentListItemProfileTextWrap>
           <ReadCommentListItemProfileName>
             {comment?.user.name}
