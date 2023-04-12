@@ -41,7 +41,7 @@ const customAxiosErrorHandler = async (config: AxiosError) => {
     } catch (error) {
       window.alert("세션만료");
       token.clearToken();
-      window.location.href = "http://localhost:3000/auth";
+      window.location.href = "/auth";
     }
   }
 
