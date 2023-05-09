@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# [Dpply](https://sogon.b1nd.com/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img src="./assets/readmeMock.png" width="100%" alt="readmeMock" />
+</p>
 
-## Available Scripts
+소곤소곤(Dpply)은 학생들이 간편하게 학생회에게 건의를 할 수 있도록 하기 위해 제작된 교내 학생 건의 사이트에요.
 
-In the project directory, you can run:
+> 아쉽지만 해당 서비스는 Dauth 로그인만 지원하고 있어, 대소고학생 들만 사용할 수 있어요 🥲
 
-### `npm start`
+# 프로젝트 기능
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 건의 기능
+  - 학생들이 건의를 생성, 삭제, 수정하여 학생회에게 건의합니다.
+- 건의 공감 기능
+  - 학생들이 대기중인 건의를 좋아요로 공감 할 수 있고 댓글을 달 수 있습니다.
+- 건의 수락 기능
+  - 어드민이 건의를 수락, 거절 할 수 있습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Dpply 화면
 
-### `npm test`
+<img src="./assets/screen6.png" width="100%" alt="screen6" />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> 위 사진은 로그인 페이지에요. Dauth(도담도담 OAuth)를 통해 로그인 가능해요.
 
-### `npm run build`
+<img src="./assets/screen1.png" width="100%" alt="screen1" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 위 사진은 Dpply의 메인페이지에요. 현재 건의되고있는 건의리스트와과 내 건의리스트를 볼 수 있어요.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="./assets/screen2.png" width="100%" alt="screen2" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 위 사진은 건의 상세페이지 상단부에요. 건의 내용을 상세하게 확인할 수 있고 좋아요를 누를 수 있어요.
 
-### `npm run eject`
+<img src="./assets/screen3.png" width="100%" alt="screen3" />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> 위 사진은 건의 상세페이지 하단부에요. 건의에 대한 댓글을 달 수 있어요.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img src="./assets/screen4.png" width="100%" alt="screen4" />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> 위 사진은 내 프로필 페이지에요. 자신이 신청한 건의와 승인된 건의를 확인할 수 있어요.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src="./assets/screen5.png" width="100%" alt="screen5" />
 
-## Learn More
+> 위 사진은 건의 작성 페이지에요, 제목, 해시태그, 사진, 내용을 입력해서 건의를 등록할 수 있어요.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img src="./assets/screen7.png" width="100%" alt="screen7" />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> 위 사진은 관리자 페이지에요. 건의된 건의들을 승인하고 거절할 수 있어요.
+
+# 기술 스택
+
+`TypeScript`, `React`, `React-Query`, `Styled-Components`, `Axios`
+
+# 링크
+
+https://sogon.b1nd.com/
